@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../projects-pillpack-style.css">
+    <title>PPHNS Shop and Season Viewer</title>
+    <style>
+        html {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        body::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+        body {
+            background: linear-gradient(to bottom, #1a1e3f, #212746);
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: #2b416d transparent;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #2b416d;
+            border-radius: 10px;
+        }
+        .navbar {
+            background-color: #191d3e;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #253e5f;
+            position: relative;
+        }
+    </style>
+    <script type="module" src="model-viewer.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Shop Icon">
+            <span class="shop-text">Shop</span>
+        </div>
+        <ul style="font-weight: bold;">
+            <li><a href="#all" class="selected" data-category="all">All</a></li>
+            <li><a href="#playermodels" data-category="playermodels">Playermodels</a></li>
+            <li><a href="#wearable" data-category="wearable">Wearable</a></li>
+            <li><a href="#pills" data-category="pills">Pills</a></li>
+            <li><a href="#emotes" data-category="emotes">Emotes</a></li>
+            <li><a href="#weapons" data-category="weapons">Weapons</a></li>
+            <li><a href="#forgotten-chests" data-category="forgotten-chests">Forgotten Chests</a></li>
+            <li><a href="#misc" data-category="misc">Misc</a></li>
+            <li><a href="#trails" data-category="trails">Trails</a></li>
+        </ul>
+    </div>
+    <div class="content-wrapper">
+        <div class="sidebar">
+            <div class="sub-category">
+                <h3>Filter By</h3>
+                <div class="search-bar">
+                    <label for="category-search-input"><strong>Name</strong></label>
+                    <input type="text" id="category-search-input" placeholder="Search by Name...">
+                </div>
+                <ul>
+                    <strong>Rarity</strong>
+                    <li><label><input type="checkbox" class="rarity-filter" value="common"> Common</label></li>
+                    <li><label><input type="checkbox" class="rarity-filter" value="uncommon"> Uncommon</label></li>
+                    <li><label><input type="checkbox" class="rarity-filter" value="rare"> Rare</label></li>
+                    <li><label><input type="checkbox" class="rarity-filter" value="epic"> Epic</label></li>
+                    <li><label><input type="checkbox" class="rarity-filter" value="legendary"> Legendary</label></li>
+                    <li><label><input type="checkbox" class="rarity-filter" value="mythical"> Mythical</label></li>
+                    <li><label><input type="checkbox" class="rarity-filter" value="unobtainable"> Seasonal/Rewarded</label></li>
+                </ul>
+                <ul>
+                    <strong>Order By</strong>
+                    <li><label style="margin: 3px 0;"><input type="radio" name="price-order" value="high-to-low"> Highest Price</label></li>
+                    <li><label><input type="radio" name="price-order" value="low-to-high"> Lowest Price</label></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="item-grid">
+                <!-- Playermodels -->
+                <div class="item common" data-category="playermodels">
+                    <img src="path/to/playermodel1.jpg" alt="Playermodel 1">
+                    <h3>Playermodel 1</h3>
+                    <p class="donator">Donator Only</p>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Legendary</p>
+                            <p class="effect">Effect: Glowing Aura</p>
+                            <p>This playermodel has a glowing aura effect that makes it stand out in the game.</p>
+                        </div>
+                    </div>
+                    <p>Price: 1000 Points</p>
+                    <model-viewer class="model-viewer" src="models/playermodel1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item uncommon" data-category="playermodels">
+                    <img src="path/to/playermodel2.jpg" alt="Playermodel 2">
+                    <h3>Playermodel 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Mythical</p>
+                            <p class="effect">Effect: Sparkling</p>
+                            <p>This playermodel has a sparkling effect that adds a magical touch.</p>
+                        </div>
+                    </div>
+                    <p>Price: 800 Points</p>
+                    <model-viewer class="model-viewer" src="models/playermodel2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Wearable -->
+                <div class="item rare" data-category="wearable">
+                    <img src="path/to/wearable1.jpg" alt="Wearable 1">
+                    <h3>Wearable 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Uncommon</p>
+                            <p class="effect">Effect: None</p>
+                            <p>This wearable item does not have any special effects.</p>
+                        </div>
+                    </div>
+                    <p>Price: 200 Points</p>
+                    <model-viewer class="model-viewer" src="models/wearable1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item epic" data-category="wearable">
+                    <img src="path/to/wearable2.jpg" alt="Wearable 2">
+                    <h3>Wearable 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Common</p>
+                            <p class="effect">Effect: None</p>
+                            <p>This wearable item does not have any special effects.</p>
+                        </div>
+                    </div>
+                    <p>Price: 100 Points</p>
+                    <model-viewer class="model-viewer" src="models/wearable2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Pills -->
+                <div class="item legendary" data-category="pills">
+                    <img src="path/to/pill1.jpg" alt="Pill 1">
+                    <h3>Pill 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Rare</p>
+                            <p class="effect">Effect: Healing</p>
+                            <p>This pill provides a healing effect when used.</p>
+                        </div>
+                    </div>
+                    <p>Price: 500 Points</p>
+                    <model-viewer class="model-viewer" src="models/pill1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item mythical" data-category="pills">
+                    <img src="path/to/pill2.jpg" alt="Pill 2">
+                    <h3>Pill 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Common</p>
+                            <p class="effect">Effect: Speed Boost</p>
+                            <p>This pill provides a speed boost effect when used.</p>
+                        </div>
+                    </div>
+                    <p>Price: 300 Points</p>
+                    <model-viewer class="model-viewer" src="models/pill2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Emotes -->
+                <div class="item unobtainable" data-category="emotes">
+                    <img src="path/to/emote1.jpg" alt="Emote 1">
+                    <h3>Emote 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Legendary</p>
+                            <p class="effect">Effect: Dance</p>
+                            <p>This emote allows your character to perform a dance move.</p>
+                        </div>
+                    </div>
+                    <p>Price: 700 Points</p>
+                    <model-viewer class="model-viewer" src="models/emote1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item" data-category="emotes">
+                    <img src="path/to/emote2.jpg" alt="Emote 2">
+                    <h3>Emote 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Uncommon</p>
+                            <p class="effect">Effect: Wave</p>
+                            <p>This emote allows your character to wave.</p>
+                        </div>
+                    </div>
+                    <p>Price: 400 Points</p>
+                    <model-viewer class="model-viewer" src="models/emote2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Weapons -->
+                <div class="item" data-category="weapons">
+                    <img src="path/to/weapon1.jpg" alt="Weapon 1">
+                    <h3>Weapon 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Mythical</p>
+                            <p class="effect">Effect: Fire</p>
+                            <p>This weapon has a fire effect that deals extra damage.</p>
+                        </div>
+                    </div>
+                    <p>Price: 1200 Points</p>
+                    <model-viewer class="model-viewer" src="models/weapon1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item" data-category="weapons">
+                    <img src="path/to/weapon2.jpg" alt="Weapon 2">
+                    <h3>Weapon 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Rare</p>
+                            <p class="effect">Effect: Ice</p>
+                            <p>This weapon has an ice effect that slows down enemies.</p>
+                        </div>
+                    </div>
+                    <p>Price: 900 Points</p>
+                    <model-viewer class="model-viewer" src="models/weapon2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Forgotten Chests -->
+                <div class="item" data-category="forgotten-chests">
+                    <img src="path/to/chest1.jpg" alt="Chest 1">
+                    <h3>Chest 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Legendary</p>
+                            <p class="effect">Effect: Random Loot</p>
+                            <p>This chest contains random legendary loot.</p>
+                        </div>
+                    </div>
+                    <p>Price: 1500 Points</p>
+                    <model-viewer class="model-viewer" src="models/chest1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item" data-category="forgotten-chests">
+                    <img src="path/to/chest2.jpg" alt="Chest 2">
+                    <h3>Chest 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Uncommon</p>
+                            <p class="effect">Effect: Random Loot</p>
+                            <p>This chest contains random uncommon loot.</p>
+                        </div>
+                    </div>
+                    <p>Price: 800 Points</p>
+                    <model-viewer class="model-viewer" src="models/chest2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Misc -->
+                <div class="item" data-category="misc">
+                    <img src="path/to/misc1.jpg" alt="Misc 1">
+                    <h3>Misc 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Common</p>
+                            <p class="effect">Effect: None</p>
+                            <p>This miscellaneous item does not have any special effects.</p>
+                        </div>
+                    </div>
+                    <p>Price: 100 Points</p>
+                    <model-viewer class="model-viewer" src="models/misc1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item" data-category="misc">
+                    <img src="path/to/misc2.jpg" alt="Misc 2">
+                    <h3>Misc 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Rare</p>
+                            <p class="effect">Effect: None</p>
+                            <p>This miscellaneous item does not have any special effects.</p>
+                        </div>
+                    </div>
+                    <p>Price: 300 Points</p>
+                    <model-viewer class="model-viewer" src="models/misc2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <!-- Trails -->
+                <div class="item" data-category="trails">
+                    <img src="path/to/trail1.jpg" alt="Trail 1">
+                    <h3>Trail 1</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Legendary</p>
+                            <p class="effect">Effect: Glowing</p>
+                            <p>This trail leaves a glowing effect behind your character.</p>
+                        </div>
+                    </div>
+                    <p>Price: 1000 Points</p>
+                    <model-viewer class="model-viewer" src="models/trail1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+                <div class="item" data-category="trails">
+                    <img src="path/to/trail2.jpg" alt="Trail 2">
+                    <h3>Trail 2</h3>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Uncommon</p>
+                            <p class="effect">Effect: Sparkling</p>
+                            <p>This trail leaves a sparkling effect behind your character.</p>
+                        </div>
+                    </div>
+                    <p>Price: 500 Points</p>
+                    <model-viewer class="model-viewer" src="models/trail2.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="pphns-shop-script.js"></script>
+</body>
+</html>
