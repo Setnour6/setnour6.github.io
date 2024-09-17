@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../projects-pillpack-style.css">
+    <title>PPHNS Season Viewer: Season 2</title>
+    <style>
+        @font-face {
+            font-family: 'Misery';
+            src: url('fonts/misery.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            background: #636363;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .help-icon {
+            width: 20px;
+            height: 20px;
+        }
+        .help-icon span {
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .season-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .title {
+            font-family: 'Misery';
+            font-size: 2em;
+            margin-bottom: 10px;
+            grid-column: span 10;
+        }
+        .rewards {
+            font-family: 'Misery';
+            font-size: 2.4em;
+            grid-column: span 10;
+        }
+        .title {
+            background: repeating-linear-gradient(90deg, blue, red, red, blue);
+            background-size: 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient reverse 1.75s linear infinite;
+            display: inline-block;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+        .timer {
+            font-size: 3.5em;
+            font-family: 'Misery';
+        }
+        .rank-item-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 0.75fr);
+        }
+        .rank-item-grid .rank {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .rank-item-grid .rank img {
+            width: 150px;
+            height: 150px;
+            padding-top: 26px;
+        }
+        .rank-item-grid .item {
+            background: #1d2c4b;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 4px;
+            width: 80%;
+            font-size: 0.8em;
+        }
+        .rank-item-grid .item img {
+            width: 100%;
+            height: 100px;
+        }
+        .rank-content-rb { /* Right Border */
+            border-right: 2px solid #ffffff;
+        }
+        .rank-content-lb { /* Left Border */
+            border-left: 2px solid #ffffff;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .nav-button {
+            position: absolute;
+            top: 20px;
+            background-color: #2b416d;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-button svg {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        .nav-button a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .left-button {
+            left: 20px;
+            z-index: 2;
+        }
+        .right-button {
+            right: 20px;
+            z-index: 2;
+        }
+        .button-not-allowed {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="season-container">
+        <div class="title">SEASON 2</div>
+        <div id="timer" class="timer"></div>
+        <div class="rank-item-grid">
+            <div class="rank">
+                <img src="../media/rank-icons/logo.png" alt="Unranked">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/bronze.png" alt="Bronze">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/silver.png" alt="Silver">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/gold.png" alt="Gold">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/platinum.png" alt="Platinum">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/diamond.png" alt="Diamond">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/emerald.png" alt="Emerald">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/sapphire.png" alt="Sapphire">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/ruby.png" alt="Ruby">
+            </div>
+            <div class="rank">
+                <img src="../media/rank-icons/champ.gif" alt="Champion">
+            </div>
+        </div>
+        <div class="rewards">REWARDS</div>
+        <div class="separator"></div>
+        <div class="rank-item-grid">
+            <div class="rank rank-content-lb rank-content-rb">
+                <div class="item unobtainable" data-category="emotes">
+                    <img src="../media/shy_hello_emote.png">
+                    <div>Shy Hello</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Emote</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="playermodels">
+                    <img src="../media/a-train-playermodel.png">
+                    <div>A-TRAIN</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Playermodel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="emotes">
+                    <img src="../media/shadow-boxer_emote.png">
+                    <div>Shadow Boxer</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Emote</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="playermodels">
+                    <img src="../media/stars-death-effect.png">
+                    <div>Stars</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Death Effect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="playermodels">
+                    <img src="../media/elizabeth-afton-playermodel.png">
+                    <div>Elizabeth Afton</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Playermodel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="misc">
+                    <img src="../media/wilhelm-kill-sound.png">
+                    <div>Wilhelm Kill Sound</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Death Sound</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="playermodels">
+                    <img src="../media/ghillie-suit-playermodel.png">
+                    <div>Ghillie Suit</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Playermodel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="weapons">
+                    <img src="../media/motion-tracker-item.png">
+                    <div>Motion Tracker</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Weapon</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item unobtainable" data-category="playermodels">
+                    <img src="../media/cubemap.png">
+                    <div>Cubemap</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Playermodel Effect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="wearable">
+                    <img src="../media/general-pepper-hat-wearable.png">
+                    <div>General Pepper Hat</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Wearable</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item unobtainable" data-category="playermodels">
+                    <img src="../media/ignite.png">
+                    <div>Ignite</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Playermodel Effect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rank rank-content-rb">
+                <div class="item unobtainable" data-category="trails">
+                    <img src="../media/creation-pill.png">
+                    <div>Champion</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Trail</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item unobtainable" data-category="pills">
+                    <img src="../media/creation-pill.png">
+                    <div>Creation Pill</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Pill</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item unobtainable" data-category="weapons">
+                    <img src="../media/portal-gun-item.png">
+                    <div>Portal Gun</div>
+                    <div class="help-icon">
+                        <span>?</span>
+                        <div class="help-text">
+                            <p class="rarity">Rarity: Seasonal/Rewarded</p>
+                            <p class="effect">Type: Weapon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+        </div>
+    </div>
+    <button class="nav-button left-button button-not-allowed" style="background-color: #553737;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="40px">
+            <path fill="#ffffff" d="M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z"/>
+        </svg>
+        <a class="button-text button-not-allowed">Season 1</a>
+    </button>
+    <button class="nav-button right-button" onclick="window.location.href='pphns-season-three.html'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="40px">
+            <path fill="#ffffff" d="M7.82054 20.7313C8.21107 21.1218 8.84423 21.1218 9.23476 20.7313L15.8792 14.0868C17.0505 12.9155 17.0508 11.0167 15.88 9.84497L9.3097 3.26958C8.91918 2.87905 8.28601 2.87905 7.89549 3.26958C7.50497 3.6601 7.50497 4.29327 7.89549 4.68379L14.4675 11.2558C14.8581 11.6464 14.8581 12.2795 14.4675 12.67L7.82054 19.317C7.43002 19.7076 7.43002 20.3407 7.82054 20.7313Z"/>
+        </svg>
+        <a class="button-text" href='pphns-season-three.html'>Season 3</a>
+    </button>
+    <button id="return" class="nav-button return-button" onclick="window.location.href='../main.html'" style="right: 91.9%; top: 8%; z-index: 2;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" transform="rotate(90)">
+            <path  fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M12.6569 2.75736C15 0.414213 18.799 0.414214 21.1421 2.75736C23.4853 5.1005 23.4853 8.8995 21.1421 11.2426L11.2426 21.1421C8.89949 23.4853 5.1005 23.4853 2.75736 21.1421C0.414214 18.799 0.414213 15 2.75736 12.6569L12.6569 2.75736ZM19.7279 9.82843L15.4853 14.0711L9.82843 8.41421L14.0711 4.17157C15.6332 2.60948 18.1658 2.60948 19.7279 4.17157C21.29 5.73367 21.29 8.26633 19.7279 9.82843Z"/>
+        </svg>
+        Menu
+    </button>
+    <button class="home-button" onclick="window.location.href='../../index.html'" style="right: 91.9%; top: 13%; width: 110px; z-index: 2;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        Home
+    </button>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <script src="pphns-season-two-script.js"></script>
+    <script src="../pphns-help-icon-script.js"></script>
+</body>
+</html>
