@@ -21,9 +21,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
             position: relative;
+            padding: 10px;
         }
         .help-icon {
             width: 20px;
@@ -37,19 +38,13 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
         .title {
             font-family: 'Misery';
             font-size: 2em;
             margin-bottom: 10px;
             grid-column: span 10;
-        }
-        .rewards {
-            font-family: 'Misery';
-            font-size: 2.4em;
-            grid-column: span 10;
-        }
-        .title {
             background: repeating-linear-gradient(90deg, blue, red, red, blue);
             background-size: 200%;
             background-clip: text;
@@ -57,6 +52,11 @@
             -webkit-text-fill-color: transparent;
             animation: gradient reverse 1.75s linear infinite;
             display: inline-block;
+        }
+        .rewards {
+            font-family: 'Misery';
+            font-size: 2.4em;
+            grid-column: span 10;
         }
         @keyframes gradient {
             0% {
@@ -97,7 +97,7 @@
         }
         .rank-item-grid .item img {
             width: 100%;
-            height: 100px;
+            height: 8em;
         }
         .rank-content-rb { /* Right Border */
             border-right: 2px solid #ffffff;
@@ -144,6 +144,137 @@
         }
         .button-not-allowed {
             cursor: not-allowed;
+        }
+        .home-button-via-season {
+            position: absolute;
+            top: 13%;
+            right: 91.9%;
+            background-color: #2b416d;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        .return-button-via-season {
+            position: absolute;
+            top: 8%;
+            right: 91.9%; 
+            background-color: #2b416d;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .mobile-message {
+            display: none;
+            font-size: 1.2em;
+            color: #ffffff;
+            background-color: #2b416d;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.5em;
+            }
+
+            .timer {
+                font-size: 2.5em;
+            }
+
+            .rank-item-grid .rank img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .rank-item-grid, .rewards {
+                display: none;
+            }
+
+            .mobile-message {
+                display: block;
+            }
+
+            .nav-button {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+
+            .nav-button svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .home-button-via-season {
+                /* top: 22%;
+                 right: 71%; */
+                top: 10%;
+                right: 70%;
+            }
+
+            .return-button-via-season {
+                /* top: 16%;
+                 right: 71%; */
+                top: 2.1%;
+                right: 40%;
+            }
+        }
+        @media (max-height: 600px) {
+            .title {
+                font-size: 1.5em;
+            }
+
+            .timer {
+                font-size: 2.5em;
+            }
+
+            .rank-item-grid .rank img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .rank-item-grid, .rewards {
+                display: none;
+            }
+
+            .mobile-message {
+                display: block;
+            }
+
+            .nav-button {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+
+            .nav-button svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .home-button-via-season {
+                /* top: 22%;
+                 right: 71%; */
+                top: 2.1%;
+                right: 30%;
+            }
+
+            .return-button-via-season {
+                /* top: 16%;
+                 right: 71%; */
+                top: 2.1%;
+                right: 60%;
+            }
         }
     </style>
 </head>
@@ -371,6 +502,7 @@
             <div class="separator"></div>
             <div class="separator"></div>
         </div>
+        <div class="mobile-message">the display of rewards and ranks associated with rewards are not supported on mobile. Please view this page on a computer.<br>Sorry for the inconvenience.</div>
     </div>
     <button class="nav-button left-button button-not-allowed" style="background-color: #553737;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="40px">
@@ -384,13 +516,13 @@
         </svg>
         <a class="button-text" href='pphns-season-three.html'>Season 3</a>
     </button>
-    <button id="return" class="nav-button return-button" onclick="window.location.href='../main.html'" style="right: 91.9%; top: 8%; z-index: 2;">
+    <button id="return" class="nav-button return-button-via-season" onclick="window.location.href='../main.html'" style="position: absolute; width: 7em; z-index: 2;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" transform="rotate(90)">
             <path  fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M12.6569 2.75736C15 0.414213 18.799 0.414214 21.1421 2.75736C23.4853 5.1005 23.4853 8.8995 21.1421 11.2426L11.2426 21.1421C8.89949 23.4853 5.1005 23.4853 2.75736 21.1421C0.414214 18.799 0.414213 15 2.75736 12.6569L12.6569 2.75736ZM19.7279 9.82843L15.4853 14.0711L9.82843 8.41421L14.0711 4.17157C15.6332 2.60948 18.1658 2.60948 19.7279 4.17157C21.29 5.73367 21.29 8.26633 19.7279 9.82843Z"/>
         </svg>
         Menu
     </button>
-    <button class="home-button" onclick="window.location.href='../../index.html'" style="right: 91.9%; top: 13%; width: 110px; z-index: 2;">
+    <button class="nav-button home-button-via-season" onclick="window.location.href='../../index.html'" style="position: absolute; width: 7em; z-index: 2;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </svg>

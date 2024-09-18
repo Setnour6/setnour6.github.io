@@ -40,6 +40,88 @@
             border-bottom: 2px solid #253e5f;
             position: relative;
         }
+        .hamburger {
+            position: relative;
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+        .hamburger.open div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .hamburger.open div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        @media (max-width: 600px) {
+            .hamburger {
+                display: flex;
+                z-index: 3;
+                top: 100%;
+                left: 42%;
+            }
+            .sidebar {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #191d3e;
+                z-index: 2;
+                padding: 20px;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+                overflow-y: auto;
+            }
+            .sidebar.open {
+                display: block;
+            }
+        }
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+        }
+        .sidebar h2, .sidebar h3 {
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 5px 0;
+        }
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) and (orientation: portrait) {
+            body {
+                transform: rotate(90deg);
+                transform-origin: left top;
+                width: 100vh;
+                height: 100vw;
+                overflow-x: hidden;
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+            .navbar, .content-wrapper {
+                transform: rotate(-90deg);
+                transform-origin: left top;
+                width: 100vw;
+                height: 100vh;
+            }
+        }
     </style>
     <script type="module" src="model-viewer.js"></script>
 </head>
@@ -48,6 +130,11 @@
         <div class="logo">
             <img src="../media/rank-icons/logo.png" alt="Shop Icon">
             <span class="shop-text">Shop</span>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
         <button id="return" class="return-button" onclick="window.location.href='../main.html'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" transform="rotate(90)">

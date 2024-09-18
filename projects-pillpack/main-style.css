@@ -6,7 +6,7 @@
 }
 @font-face {
 	font-family: 'Quicksand';
-	src: url("../fonts/Quicksand-Bold.ttf") format('truetype');
+	src: url("../fonts/Quicksand-Regular.ttf") format('truetype');
 	font-weight: bold;
     font-style: normal;
 }
@@ -25,11 +25,17 @@ body, html {
 body {
 	font-family: 'Quicksand';
 	-webkit-font-smoothing: antialiased;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	font-size: 16px;
 	text-shadow: 1px 1px 0px rgb(0, 0, 0);
 	color: rgb(255,255,255);
 	background-color: black;
 	overflow: hidden;
+	height: 100vh;
+	margin: 0;
 }
 
 video {
@@ -41,6 +47,99 @@ video {
 	z-index: -2;
 	background-size: cover;
 	background-position: center; 
+	filter: blur(4px);
+    -webkit-filter: blur(4px); /* For Safari */
+    -ms-filter: blur(4px);
+}
+h1 {
+	margin-bottom: 50px;
+}
+.navbar {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+.button-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	margin-top: 20px;
+	opacity: 0;
+	transform: translateY(50px);
+	animation: fadeInUp 1s forwards;
+}
+.button {
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.shop-button {
+	background-color: #007bff;
+	color: #ffffff;
+}
+.other-button {
+	background-color: #2b416d;
+	color: #ffffff;
+}
+.shop-button a {
+	color: #ffffff;
+	text-decoration: none;
+}
+.season-button {
+	background-color: #ffffff;
+	color: #121212;
+}
+.season-button a {
+	text-decoration: none;
+}
+.button-not-allowed {
+	cursor: not-allowed;
+}
+.separator {
+	width: 0;
+	height: 2px;
+	background-color: #ffffff;
+	margin: 20px 0;
+	animation: extend 1s forwards;
+}
+.season-buttons {
+	display: flex;
+	gap: 20px;
+}
+.mute-button {
+	background-color: #ff0000;
+	color: #ffffff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	position: absolute;
+	bottom: 1.7em;
+	left: 1.7em;
+}
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes extend {
+	to {
+		width: 100%;
+	}
+}
+@media (max-width: 600px), (max-height: 600px) {
+	.mute-button {
+		bottom: 4.3em;
+		left: 1.7em;
+	}
+	video {
+		transform: translateX(30%)
+	}
 }
 #warn {
 	display: none;
