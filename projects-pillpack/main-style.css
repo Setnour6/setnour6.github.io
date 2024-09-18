@@ -76,6 +76,27 @@ h1 {
 	border-radius: 5px;
 	cursor: pointer;
 }
+.mute-button {
+	background-color: #ff0000;
+	color: #ffffff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	position: absolute;
+	bottom: 1.7em;
+	left: 1.7em;
+}
+.home-button-for-menu {
+	position: absolute;
+	bottom: 1.7em;
+	left: 1.7em;
+	top: 9%;
+	width: 72px;
+	height: 50px;
+	vertical-align: middle !important;
+}
 .shop-button {
 	background-color: #007bff;
 	color: #ffffff;
@@ -98,28 +119,16 @@ h1 {
 .button-not-allowed {
 	cursor: not-allowed;
 }
+.season-buttons {
+	display: flex;
+	gap: 20px;
+}
 .separator {
 	width: 0;
 	height: 2px;
 	background-color: #ffffff;
 	margin: 20px 0;
 	animation: extend 1s forwards;
-}
-.season-buttons {
-	display: flex;
-	gap: 20px;
-}
-.mute-button {
-	background-color: #ff0000;
-	color: #ffffff;
-	border: none;
-	padding: 10px 20px;
-	cursor: pointer;
-	font-size: 16px;
-	border-radius: 5px;
-	position: absolute;
-	bottom: 1.7em;
-	left: 1.7em;
 }
 @keyframes fadeInUp {
 	to {
@@ -132,13 +141,33 @@ h1 {
 		width: 100%;
 	}
 }
-@media (max-width: 600px), (max-height: 600px) {
-	.mute-button {
-		bottom: 4.3em;
+@media (max-width: 600px) {
+	video {
+		transform: translateX(35%)
+	}
+}
+@media (max-height: 600px) {
+	.home-button-for-menu {
 		left: 1.7em;
+		top: 4.3em;
 	}
 	video {
-		transform: translateX(30%)
+		transform: translate(35%, 30%)
+	}
+}
+@media (max-width: 400px) and (max-height: 900px) {
+	.home-button-for-menu {
+		left: 1.7em;
+		top: 5.1em;
+	}
+	video {
+		transform: translateX(35%)
+	}
+}
+@media (max-height: 400px) {
+	.home-button-for-menu {
+		left: 1.7em;
+		top: 4.3em;
 	}
 }
 #warn {

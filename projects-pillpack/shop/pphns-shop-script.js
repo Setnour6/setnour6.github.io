@@ -97,8 +97,3 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     sidebar.classList.toggle('open');
 });
-window.addEventListener('orientationchange', function() {
-    if (window.orientation === 0 || window.orientation === 180) {
-        alert("Please rotate your device to landscape mode for the best experience.");
-    }
-});
