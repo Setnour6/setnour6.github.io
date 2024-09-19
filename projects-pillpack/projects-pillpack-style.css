@@ -101,6 +101,16 @@
         transform: translate(50px, 0px);
     }
 }
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button-not-allowed {
+    cursor: not-allowed;
+}
 .home-button {
     position: absolute;
     top: 16px;
@@ -554,181 +564,4 @@ label {
 .help-icon.active .help-text {
     visibility: visible;
     opacity: 1;
-}
-.bubble {
-    position: absolute;
-    bottom: -100px;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    animation: floatUp 40s infinite;
-    left: calc(var(--random-left) * 1%)
-}
-.bubble:nth-child(2) {
-    width: 60px;
-    height: 60px;
-    left: 10%;
-    animation-duration: 50s;
-    animation-delay: -10s;
-}
-.bubble:nth-child(3) {
-    width: 80px;
-    height: 80px;
-    left: 20%;
-    bottom: 30%;
-    animation-duration: 60s;
-    animation-delay: -20s;
-}
-.bubble:nth-child(4) {
-    width: 50px;
-    height: 50px;
-    left: 30%;
-    bottom: 0%;
-    animation-duration: 70s;
-    animation-delay: -30s;
-}
-.bubble:nth-child(5) {
-    width: 70px;
-    height: 70px;
-    left: 40%;
-    bottom: -80%;
-    animation-duration: 80s;
-    animation-delay: -40s;
-}
-.bubble:nth-child(6) {
-    width: 90px;
-    height: 90px;
-    left: 50%;
-    bottom: -20%;
-    animation-duration: 90s;
-    animation-delay: -20s;
-}
-.bubble:nth-child(7) {
-    width: 60px;
-    height: 60px;
-    left: 60%;
-    bottom: -40%;
-    animation-duration: 100s;
-    animation-delay: -50s;
-}
-.bubble:nth-child(8) {
-    width: 100px;
-    height: 100px;
-    left: 30%;
-    bottom: 30%;
-    animation-duration: 110s;
-    animation-delay: -10s;
-}
-.bubble:nth-child(9) {
-    width: 80px;
-    height: 80px;
-    left: 80%;
-    animation-duration: 120s;
-    animation-delay: -10s;
-}
-.bubble:nth-child(10) {
-    width: 50px;
-    height: 50px;
-    left: 90%;
-    animation-duration: 130s;
-    animation-delay: -20s;
-}
-.bubble:nth-child(11) {
-    width: 40px;
-    height: 40px;
-    left: 15%;
-    animation-duration: 45s;
-    animation-delay: -15s;
-}
-.bubble:nth-child(12) {
-    width: 70px;
-    height: 70px;
-    left: 25%;
-    animation-duration: 55s;
-    animation-delay: -5s;
-}
-.bubble:nth-child(13) {
-    width: 90px;
-    height: 90px;
-    left: 85%;
-    animation-duration: 95s;
-    animation-delay: -45s;
-}
-.bubble:nth-child(14) {
-    width: 60px;
-    height: 60px;
-    left: 45%;
-    animation-duration: 75s;
-    animation-delay: -45s;
-}
-.bubble:nth-child(15) {
-    width: 80px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.4);
-    left: 55%;
-    animation-duration: 175s;
-    animation-delay: -95s;
-}
-.bubble:nth-child(16) {
-    width: 50px;
-    height: 50px;
-    left: 70%;
-    animation-duration: 95s;
-    animation-delay: -25s;
-}
-.bubble:nth-child(17) {
-    width: 70px;
-    height: 70px;
-    background-color: rgba(255, 255, 255, 0.4);
-    left: 75%;
-    animation-duration: 105s;
-    animation-delay: -75s;
-}
-.bubble:nth-child(18) {
-    width: 90px;
-    height: 90px;
-    left: 85%;
-    animation-duration: 115s;
-    animation-delay: -85s;
-}
-.bubble:nth-child(19) {
-    width: 60px;
-    height: 60px;
-    left: 95%;
-    animation-duration: 125s;
-    animation-delay: -95s;
-}
-.bubble:nth-child(n+20) {
-    width: 30px;
-    height: 30px;
-    animation-duration: 200s;
-    animation-delay: calc(-1 * var(--random-delay) * 1s);
-    left: --random-left;
-}
-@keyframes floatUp {
-    0% {
-        transform: translateY(0);
-        opacity: 0;
-    }
-    5% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100vh);
-        opacity: 0;
-    }
-}
-:root {
-    --random-left: calc(100 * var(--random));
-    --random-delay: calc(100 * var(--random));
-}
-
-@keyframes random {
-    0% {
-        --random: 0;
-    }
-    100% {
-        --random: 1;
-    }
 }
