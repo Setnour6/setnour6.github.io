@@ -70,48 +70,40 @@
     </button>
 
     <button class="mute-button" id="mute-button">Mute Audio</button>
+    <button class="play-button" id="play-button">Play Audio</button>
 
     <script>
         const audio = document.getElementById('background-audio');
         const muteButton = document.getElementById('mute-button');
-    
-        // Check local storage for mute state and playback time
+        const playButton = document.getElementById('play-button');
+
         const isMuted = localStorage.getItem('isMuted') === 'true';
-        const savedTime = localStorage.getItem('audioTime') || 0;
         audio.muted = isMuted;
-        audio.currentTime = savedTime;
         muteButton.textContent = isMuted ? 'Unmute Audio' : 'Mute Audio';
-    
-        // Function to play audio
-        const playAudio = () => {
-            audio.play().catch(error => {
-                console.error('Audio playback failed:', error);
-            });
-        };
-    
-        // Play audio on page load (for non-mobile devices)
-        playAudio();
-    
-        // Add event listener for touch events on mobile devices
-        document.addEventListener('touchstart', () => {
-            playAudio();
-        }, { once: true });
-    
-        // Save the current playback time before the page unloads
-        window.addEventListener('beforeunload', () => {
-            localStorage.setItem('audioTime', audio.currentTime);
-        });
-    
+
+        audio.play();
+
         audio.addEventListener('ended', () => {
             audio.currentTime = 0;
-            playAudio();
+            audio.play();
         });
-    
+
         muteButton.addEventListener('click', () => {
             audio.muted = !audio.muted;
             localStorage.setItem('isMuted', audio.muted);
             muteButton.textContent = audio.muted ? 'Unmute Audio' : 'Mute Audio';
         });
-    </script>     
+
+        setInterval(() => {
+            if (audio.paused) {
+                playButton.style.display = 'block';
+            }
+        }, 1000);
+
+        playButton.addEventListener('click', () => {
+            audio.play();
+            playButton.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

@@ -88,6 +88,19 @@ h1 {
 	bottom: 1.7em;
 	left: 1.7em;
 }
+.play-button {
+	background-color: #00bb00;
+	color: #ffffff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	position: absolute;
+	bottom: 1.7em;
+	left: 10em;
+	display: none;
+}
 .home-button-for-menu {
 	position: absolute;
 	bottom: 1.7em;
