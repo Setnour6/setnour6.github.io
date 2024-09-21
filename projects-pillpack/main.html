@@ -74,24 +74,44 @@
     <script>
         const audio = document.getElementById('background-audio');
         const muteButton = document.getElementById('mute-button');
-
-        // Check local storage for mute state
+    
+        // Check local storage for mute state and playback time
         const isMuted = localStorage.getItem('isMuted') === 'true';
+        const savedTime = localStorage.getItem('audioTime') || 0;
         audio.muted = isMuted;
+        audio.currentTime = savedTime;
         muteButton.textContent = isMuted ? 'Unmute Audio' : 'Mute Audio';
-
-        audio.play();
-
+    
+        // Function to play audio
+        const playAudio = () => {
+            audio.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+        };
+    
+        // Play audio on page load (for non-mobile devices)
+        playAudio();
+    
+        // Add event listener for touch events on mobile devices
+        document.addEventListener('touchstart', () => {
+            playAudio();
+        }, { once: true });
+    
+        // Save the current playback time before the page unloads
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('audioTime', audio.currentTime);
+        });
+    
         audio.addEventListener('ended', () => {
             audio.currentTime = 0;
-            audio.play();
+            playAudio();
         });
-
+    
         muteButton.addEventListener('click', () => {
             audio.muted = !audio.muted;
             localStorage.setItem('isMuted', audio.muted);
             muteButton.textContent = audio.muted ? 'Unmute Audio' : 'Mute Audio';
         });
-    </script>
+    </script>     
 </body>
 </html>
