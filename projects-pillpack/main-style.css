@@ -207,12 +207,12 @@ h1 {
 		left: 59.2em;
 	}
 }
-@media (min-width: 400px) and (max-height: 1000px) {
+@media (max-width: 500px) and (max-height: 1000px) {
 	.play-button {
-		left: 17.7em;
+		left: 15.2em;
 	}
 	.mobile-warning {
-		left: 24.2em;
+		left: 21.2em;
 	}
 }
 @media (min-width: 900px) and (max-height: 500px) {
@@ -223,12 +223,12 @@ h1 {
 		left: 66.2em;
 	}
 }
-@media (min-width: 800px) and (max-height: 400px) {
+@media (min-width: 400px) and (max-width: 430px) and (max-height: 1000px) {
 	.play-button {
-		left: 43.2em;
+		left: 17.7em;
 	}
 	.mobile-warning {
-		left: 58.2em;
+		left: 24.2em;
 	}
 }
 #warn {
