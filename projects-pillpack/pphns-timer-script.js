@@ -15,7 +15,7 @@ function calculateTime(endTime) {
     return { days, hours, minutes, seconds, distance };
 }
 
-function startTimer(endTime, display, endMessage = "ENDED") {
+function startTimer(endTime, display, endMessage = "SEASON ENDED") {
     function updateTimer() {
         var { days, hours, minutes, seconds, distance } = calculateTime(endTime);
 

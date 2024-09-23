@@ -71,11 +71,13 @@
 
     <button class="mute-button" id="mute-button">Mute Audio</button>
     <button class="play-button" id="play-button">Play Audio</button>
+    <div class="mobile-warning" id="mobile-warning">May not work <br>on mobile devices</div>
 
     <script>
         const audio = document.getElementById('background-audio');
         const muteButton = document.getElementById('mute-button');
         const playButton = document.getElementById('play-button');
+        const mobileWarning = document.getElementById('mobile-warning');
 
         const isMuted = localStorage.getItem('isMuted') === 'true';
         audio.muted = isMuted;
@@ -97,12 +99,18 @@
         setInterval(() => {
             if (audio.paused) {
                 playButton.style.display = 'block';
+                mobileWarning.style.display = 'block';
             }
+            /* } else {
+                playButton.style.display = 'none';
+                mobileWarning.style.display = 'none';
+            } */
         }, 1000);
 
         playButton.addEventListener('click', () => {
             audio.play();
             playButton.style.display = 'none';
+            mobileWarning.style.display = 'none';
         });
     </script>
 </body>

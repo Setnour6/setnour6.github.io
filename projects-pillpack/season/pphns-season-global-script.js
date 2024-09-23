@@ -22,8 +22,8 @@ for (let i = 0; i < bubbleCount; i++) {
 
 for (let i = 0; i < smallBubbleCount; i++) {
     const bubble = document.createElement('div');
-    const size = Math.random() * 20 + 5;
-    const speed = Math.random() * 260 + 140;
+    const size = Math.random() * 10 + 5;
+    const speed = Math.random() * 460 + 140;
     const startX = Math.random() * 100;
     const startY = Math.random() * 100;
 
