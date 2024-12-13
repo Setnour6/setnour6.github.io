@@ -544,7 +544,7 @@ label {
     font-size: 16px;
     line-height: 24px;
 }
-.help-icon .help-text {
+.help-text {
     visibility: hidden;
     width: 200px;
     background-color: #333;
