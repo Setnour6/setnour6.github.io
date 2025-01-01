@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../projects-pillpack-style.css">
+    <link rel="stylesheet" href="../../orientation-style.css">
+    <link rel="stylesheet" href="./pphns-pills-style.css">
+    <title>PPHNS Pill Viewer</title>
+    <link rel="icon" type="image/png" href="../media/red-ppp-icon.png">
+    <style>
+        @font-face {
+            font-family: 'Misery';
+            src: url('../../fonts/MiseryRegular-eZ4Bn.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        body::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+        body {
+            background: linear-gradient(to bottom, #3f1a1a, #462121);
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: #6d2b2b transparent;
+            background-image: url("../media/pillrankmenu.jpg"); /*background by juanito pro (source: https://www.deviantart.com/juanito-pro/art/FNAF-4-menu-house-recreation-944442227)*/
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100vh;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #6d2b2b;
+            border-radius: 10px;
+        }
+        .navbar {
+            background-color: #3e1919;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #5f2525;
+            position: relative;
+        }
+        .hamburger {
+            position: relative;
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+        .hamburger.open div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .hamburger.open div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        @media (max-width: 600px) {
+            .hamburger {
+                display: flex;
+                z-index: 3;
+                top: 100%;
+                left: 42%;
+            }
+            .sidebar {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #3e1919;
+                z-index: 2;
+                padding: 20px;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+                overflow-y: auto;
+            }
+            .sidebar.open {
+                display: block;
+            }
+        }
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+        }
+        .sidebar h2, .sidebar h3 {
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 5px 0;
+        }
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) and (orientation: portrait) {
+            body {
+                transform: rotate(90deg);
+                transform-origin: left top;
+                width: 100vh;
+                height: 100vw;
+                overflow-x: hidden;
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+            .navbar, .content-wrapper {
+                transform: rotate(-90deg);
+                transform-origin: left top;
+                width: 100vw;
+                height: 100vh;
+            }
+        }
+
+    </style>
+    <script type="module" src="model-viewer.js"></script>
+</head>
+<body>
+    <button id="return" class="nav-button return-button-via-pills" onclick="window.location.href='../main.html'" style="position: absolute; width: 7em; z-index: 2;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" transform="rotate(90)">
+            <path fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M12.6569 2.75736C15 0.414213 18.799 0.414214 21.1421 2.75736C23.4853 5.1005 23.4853 8.8995 21.1421 11.2426L11.2426 21.1421C8.89949 23.4853 5.1005 23.4853 2.75736 21.1421C0.414214 18.799 0.414213 15 2.75736 12.6569L12.6569 2.75736ZM19.7279 9.82843L15.4853 14.0711L9.82843 8.41421L14.0711 4.17157C15.6332 2.60948 18.1658 2.60948 19.7279 4.17157C21.29 5.73367 21.29 8.26633 19.7279 9.82843Z"></path>
+        </svg>
+        Menu
+    </button>
+    <button class="nav-button home-button-via-pills" onclick="window.location.href='../../index.html'" style="position: absolute; width: 7em; z-index: 2;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+        </svg>
+        Home
+    </button>
+    <audio id="backgroundMusic" loop>
+        <source src="../media/shopmainmenu.mp3" type="audio/mp3">
+    </audio>
+    <audio id="whooshSound">
+        <source src="../media/menusoundpill2.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="pill-container" id="pillContainer"></div>
+    <div class="pill-info" id="pillInfo">
+        <button class="back-button" id="backButton">Back</button>
+        <div class="pill-details-box">
+            <h1 class="pill-info-title" id="pillInfoTitle"></h1>
+            <p id="pillDescription"></p> <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+            <div class="pill-image" id="pillImage"></div>
+        </div>
+        <div class="pill-levels" id="pillLevels"></div>
+        <div class="pill-level-info" id="pillLevelInfo">
+            <p id="pillLevelInfoText"></p>
+        </div>
+    </div>
+
+    <div class="settings">
+        <div class="gear-icon" id="settingsIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#FFFFFF">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M19.43 12.98c.04-.32.07-.66.07-1s-.03-.68-.07-1l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.37-.3-.59-.22l-2.49 1a7.902 7.902 0 0 0-1.69-.98l-.38-2.65A.495.495 0 0 0 14.5 2h-5c-.28 0-.5.22-.5.5l-.38 2.65c-.59.22-1.16.51-1.69.98l-2.49-1c-.22-.08-.47 0-.59.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.66-.07 1s.03.68.07 1l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.37.3.59.22l2.49-1c.53.47 1.1.86 1.69.98l.38 2.65c.04.28.27.5.5.5h5c.28 0 .5-.22.5-.5l.38-2.65c.59-.22 1.16-.51 1.69-.98l2.49 1c.22.08.47 0 .59-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-7.43 3.02c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+            </svg>
+        </div>
+        <div class="settings-menu" id="settingsMenu">
+            <label for="transitionSpeed">Transition Speed (ms):</label>
+            <input type="number" id="transitionSpeed">
+        </div>
+    </div>
+    <!-- <script src="pphns-shop-script.js"></script> -->
+    <script src="../pphns-help-icon-script.js"></script>
+    <script src="pill-level-box-script.js"></script>
+    <script src="../../orientation-script.js"></script>
+    <script src="pill-layout.js"></script>
+</body>
+</html>

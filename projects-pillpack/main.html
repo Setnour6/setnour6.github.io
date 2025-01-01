@@ -48,10 +48,14 @@
     </audio>
 
     <div class="button-container">
-        <button class="button shop-button" style="display: flex; gap: 20px; background-color: #4f76a0;"><a href="guide/guide-info.html">Guidelines</a></button>
+        <div style="background-color: rgb(204, 204, 23); border-radius:.5rem; --tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity)); padding-top: 0.5rem; padding-bottom: 0.5rem; font-size: .875rem; line-height: 1.25rem; height: 2.25rem; padding-left: .75rem; padding-right: .75rem; justify-content: center; font-family: sans-serif; text-shadow: none; align-content: center; text-align: center;">Most pages are unfinished.<br>Contribution to this site via on GitHub would be appreciated.</div>
+        <button class="button shop-button" style="display: flex; gap: 20px; background-color: #4f76a0;"><a href="guide/guide-info.html">Guidelines (Unfinished)</a></button>
         <button class="button shop-button" style="display: flex; gap: 20px; background-color: #4d61ed;"><a href="archive/updates-archive.html">Changelog (Discord Archive)</a></button>
         <div class="separator"></div>
-        <button class="button shop-button" style="display: flex; gap: 20px;" onclick="window.location.href='shop/pphns-shop.html'"><a href='shop/pphns-shop.html'>Shop</a></button>
+        <div class="season-buttons">
+            <button class="button shop-button" style="display: flex; gap: 20px;" onclick="window.location.href='shop/pphns-shop.html'"><a href='shop/pphns-shop.html'>Shop (Unfinished)</a></button>
+            <button class="button shop-button" style="display: flex; gap: 20px; background-color: #e44c31;"><a href="pills/pphns-pills.html">Pills (Unfinished)</a></button>
+        </div>
         <div class="separator"></div>
         <div class="season-buttons">
             <button class="button season-button" onclick="window.location.href='season/pphns-season-one.html'"><a href='season/pphns-season-one.html'>Season 1</a></button>
@@ -84,7 +88,7 @@
         const playButton = document.getElementById('play-button');
         const mobileWarning = document.getElementById('mobile-warning');
 
-        const isMuted = localStorage.getItem('isMuted') === 'true';
+        let isMuted = localStorage.getItem('isMuted') === 'true';
         audio.muted = isMuted;
         muteButton.textContent = isMuted ? 'Unmute Audio' : 'Mute Audio';
 

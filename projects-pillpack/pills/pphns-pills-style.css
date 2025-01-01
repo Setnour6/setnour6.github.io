@@ -1,0 +1,387 @@
+@font-face {
+    font-family: 'Misery';
+    src: url('../../fonts/MiseryRegular-eZ4Bn.otf') format('opentype');
+    font-weight: 0;
+    font-style: normal;
+}
+.pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    height: calc(100vh - 100px); 
+    transition: opacity var(--transition-speed) ease; /* opacity 0.5s */
+}
+.pill-box {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 250px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background-size: cover;
+    background-position: center;
+}
+.pill-title {
+    font-family: "Misery";
+    color: white;
+    font-size: 20px;
+    text-shadow: 2px 2px 5px black;
+    position: absolute;
+    top: 10px;
+}
+.pill-button {
+    font-family: "Misery";
+    font-size: 16px;
+    margin-top: auto;
+    margin-bottom: 10px;
+    background-color: #570000; /* 5f2525 */
+    color: rgb(255, 0, 0);
+    width: 90%;
+    height: 12%;
+    border: 0.25rem solid #ff0000;
+    padding-top: 9px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    background-image: url("../media/bloodui.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+.pill-button:hover {
+    background-color: #6d2b2b;
+    color: #ffae00;
+    font-size: 20px;
+    padding-top: 8px;
+}
+.pill-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+    height: 84.5%;
+    max-width: 1020px;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: opacity var(--transition-speed) ease; /* opacity 0.5s */
+}
+.pill-info.active {
+    display: flex;
+}
+.pill-details-box {
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    height: 80%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+}
+.pill-details-box h1 {
+    font-family: "Misery";
+    font-size: 38px;
+    margin-bottom: 10px;
+    text-shadow: 4px 4px 2px rgb(0, 0, 0);
+}
+
+.pill-image {
+    width: 100%;
+    height: 60%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 20px 0;
+    margin-top: 40px;
+}
+
+.pill-levels {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    position: relative;
+}
+
+.pill-levels div {
+    width: 60px;
+    height: 60px;
+    background-color: #0f1211;
+    border-radius: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    z-index: 2;
+}
+.pill-levels div:hover {
+    background-color: #1b1b1b;
+}
+.pill-levels::before {
+    content: "";
+    position: absolute;
+    bottom: 8%;
+    left: 0;
+    width: calc(100% - 20px);
+    height: 2px;
+    background-color: red;
+    z-index: 1;
+    margin-bottom: 2.5%;
+    transform: translateY(-50%);
+}
+.pill-level-info {
+    display: none;
+    position: absolute;
+    background-color: #111111;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px;
+    max-width: 300px;
+    font-size: 14px;
+    text-align: center;
+    z-index: 100;
+    /* opacity: 0;
+    visibility: hidden; */
+}
+.pill-level-info p {
+    margin: 0;
+    font-size: 12px;
+}
+.pill-levels:hover .pill-level-info,
+.pill-levels.active .pill-level-info {
+    visibility: visible;
+    opacity: 1;
+}
+.pill-description {
+    font-family: Arial, sans-serif; /* Change to Misery or keep readable */
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px black;
+}
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    border: none;
+    font-size: 16px;
+    z-index: 10;
+    background-color: #5f2525;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.back-button:hover {
+    background-color: #6d2b2b;
+}
+.settings {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.settings-menu {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #5f2525;
+    padding: 10px;
+    color: white;
+    z-index: 1001;
+}
+.settings-menu input {
+    background: #3e1919;
+    color: white;
+    border: 1px solid #5f2525;
+    padding: 5px;
+}
+.gear-icon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+.mute-button {
+    font-family: 'Quicksand';
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 1.7em;
+    left: 1.7em;
+}
+.play-button {
+    font-family: 'Quicksand';
+    background-color: #00bb00;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 1.7em;
+    left: 10em;
+    display: none;
+}
+.mobile-warning {
+    color: #A0A0A0;
+    font-size: 12px;
+    position: absolute;
+    bottom: -0.2em;
+    left: 14em;
+    display: none;
+    text-align: center;
+}
+.gear-icon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.gear-icon:hover {
+    transform: rotate(30deg);
+}
+/* .nav-button {
+    position: absolute;
+    top: 20px;
+    background-color: #832323;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.nav-button svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+.nav-button a {
+    color: #ffffff;
+    text-decoration: none;
+} */
+/* .home-button {
+    position: absolute;
+    bottom: 1.7em;
+    left: 1.7em;
+    background-color: #832323;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.return-button {
+    position: absolute;
+    bottom: 1.7em;
+    left: 1.7em;
+    background-color: #832323;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+} */
+.home-button-via-pills {
+    position: absolute;
+    top: 5em;
+    left: 1.7em;
+    background-color: #832323;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+.return-button-via-pills {
+    position: absolute;
+    top: 1.7em;
+    left: 1.7em;
+    background-color: #832323;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+/* @media (max-width: 600px) {
+    .home-button-via-pills {
+        top: 1.7em;
+        left: 1.7em;
+    }
+    .return-button-via-pills {
+        top: 1.7em;
+        left: 1.7em;
+    }
+}
+@media (max-height: 600px) {
+    .home-button-via-pills {
+        top: 1.7em;
+        left: 1.7em;
+    }
+
+    .return-button-via-pills {
+        top: 1.7em;
+        left: 1.7em;
+    }
+}
+@media (max-width: 400px) {
+    .home-button-via-pills {
+        top: 1.7em;
+        left: 1.7em;
+    }
+
+    .return-button-via-pills {
+        top: 1.7em;
+        left: 1.7em;
+    }
+} */
