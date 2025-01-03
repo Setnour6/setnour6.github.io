@@ -1,4 +1,4 @@
-@media screen (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 600px) and (orientation: portrait) {
     body {
         transform: rotate(90deg);
         transform-origin: left top;

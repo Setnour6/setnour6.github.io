@@ -166,12 +166,12 @@ h1 {
 		width: 100%;
 	}
 }
-@media screen (max-width: 600px) {
+@media (max-width: 600px) {
 	video {
 		transform: translateX(35%)
 	}
 }
-@media screen (max-height: 600px) {
+@media (max-height: 600px) {
 	.home-button-for-menu {
 		left: 1.7em;
 		top: 4.3em;
@@ -180,7 +180,7 @@ h1 {
 		transform: translate(35%, 30%)
 	}
 }
-@media screen (max-width: 400px) and (max-height: 900px) {
+@media (max-width: 400px) and (max-height: 900px) {
 	.home-button-for-menu {
 		left: 1.7em;
 		top: 5.1em;
@@ -195,14 +195,14 @@ h1 {
 		left: 21.2em;
 	}
 }
-@media screen (max-width: 400px) and (min-height: 600px) and (max-height: 700px) {
+@media (max-width: 400px) and (min-height: 600px) and (max-height: 700px) {
 	.home-button-for-menu {
 		left: 6.7em;
 		top: 1.25em;
 		height: 3.25em;
 	}
 }
-@media screen (max-height: 400px) {
+@media (max-height: 400px) {
 	.home-button-for-menu {
 		left: 1.7em;
 		top: 4.3em;
@@ -214,7 +214,7 @@ h1 {
 		left: 59.2em;
 	}
 }
-@media screen (max-width: 500px) and (max-height: 1000px) {
+@media (max-width: 500px) and (max-height: 1000px) {
 	.play-button {
 		left: 15.2em;
 	}
@@ -222,7 +222,7 @@ h1 {
 		left: 21.2em;
 	}
 }
-@media screen (min-width: 900px) and (max-height: 500px) {
+@media (min-width: 900px) and (max-height: 500px) {
 	.play-button {
 		left: 49.2em;
 	}
@@ -230,7 +230,7 @@ h1 {
 		left: 66.2em;
 	}
 }
-@media screen (min-width: 400px) and (max-width: 430px) and (max-height: 1000px) {
+@media (min-width: 400px) and (max-width: 430px) and (max-height: 1000px) {
 	.play-button {
 		left: 17.7em;
 	}
