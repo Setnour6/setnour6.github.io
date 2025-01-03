@@ -166,7 +166,7 @@ body {
     text-align: center;
     margin-top: 20px;
 }
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .title {
         font-size: 1.5em;
     }
@@ -212,7 +212,7 @@ body {
         right: 40%;
     }
 }
-@media (max-height: 600px) {
+@media screen and (max-height: 600px) {
     .title {
         font-size: 1.5em;
     }
@@ -258,7 +258,7 @@ body {
         right: 60%;
     }
 }
-@media (max-width: 400px) {
+@media screen and (max-width: 400px) {
     .home-button-via-season {
         /* top: 22%;
          right: 71%; */

@@ -353,7 +353,7 @@
     align-items: center;
     border-radius: 5px;
 }
-/* @media (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
     .home-button-via-pills {
         top: 1.7em;
         left: 1.7em;
@@ -363,7 +363,7 @@
         left: 1.7em;
     }
 }
-@media (max-height: 600px) {
+@media screen and (max-height: 600px) {
     .home-button-via-pills {
         top: 1.7em;
         left: 1.7em;
@@ -374,7 +374,7 @@
         left: 1.7em;
     }
 }
-@media (max-width: 400px) {
+@media screen and (max-width: 400px) {
     .home-button-via-pills {
         top: 1.7em;
         left: 1.7em;
