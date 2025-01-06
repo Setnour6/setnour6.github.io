@@ -111,10 +111,10 @@
     <meta property="og:type" content="website">
 
 
-    <meta property="og:image"
+    <!-- <meta property="og:image"
         content="https://construct-cdn.physgun.com/BxZwJS3WNTwy5D5V/TJB4ETAXZt97ksCdRuZO4T0NfdQWwZ-metaMS5wbmc=-.png">
     <meta property="og:url" content="https://pillpack.noclip.me/forums/board/server-info">
-    <link rel="canonical" href="https://pillpack.noclip.me/forums/board/server-info">
+    <link rel="canonical" href="https://pillpack.noclip.me/forums/board/server-info"> -->
 
 
     <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +245,8 @@
     <header id="community-navbar" class="absolute top-0 left-0 z-30 w-full" x-data="{ open: false, focus: true }">
 
 
-        <div wire:id="r67BCSdv8x3Xwjzb08GD">
+        <div wire:id="r67BCSdv8x3Xwjzb08GD"
+            wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;kFZoLb2tUW992Y7kVyH6&quot;,&quot;name&quot;:&quot;livewire-ui-modal&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;forums\/board\/server-info&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;openModal&quot;,&quot;destroyComponent&quot;]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;aee64df9&quot;,&quot;data&quot;:{&quot;activeComponent&quot;:null,&quot;components&quot;:[]},&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;d32c7249141ccd9c6d713348233f602aba2b973e80339041969ac3ecaadba2a9&quot;}}">
             <script>(() => { var t, e = { 331: () => { function t(t) { return function (t) { if (Array.isArray(t)) return e(t) }(t) || function (t) { if ("undefined" != typeof Symbol && null != t[Symbol.iterator] || null != t["@@iterator"]) return Array.from(t) }(t) || function (t, o) { if (!t) return; if ("string" == typeof t) return e(t, o); var n = Object.prototype.toString.call(t).slice(8, -1); "Object" === n && t.constructor && (n = t.constructor.name); if ("Map" === n || "Set" === n) return Array.from(t); if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return e(t, o) }(t) || function () { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.") }() } function e(t, e) { (null == e || e > t.length) && (e = t.length); for (var o = 0, n = new Array(e); o < e; o++)n[o] = t[o]; return n } window.LivewireUIModal = function () { return { show: !1, showActiveComponent: !0, activeComponent: !1, componentHistory: [], modalWidth: null, getActiveComponentModalAttribute: function (t) { if (void 0 !== this.$wire.get("components")[this.activeComponent]) return this.$wire.get("components")[this.activeComponent].modalAttributes[t] }, closeModalOnEscape: function (t) { if (!1 !== this.getActiveComponentModalAttribute("closeOnEscape")) { var e = !0 === this.getActiveComponentModalAttribute("closeOnEscapeIsForceful"); this.closeModal(e) } }, closeModalOnClickAway: function (t) { !1 !== this.getActiveComponentModalAttribute("closeOnClickAway") && this.closeModal(!0) }, closeModal: function () { var t = arguments.length > 0 && void 0 !== arguments[0] && arguments[0], e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0, o = arguments.length > 2 && void 0 !== arguments[2] && arguments[2]; if (!1 !== this.show) { if (!0 === this.getActiveComponentModalAttribute("dispatchCloseEvent")) { var n = this.$wire.get("components")[this.activeComponent].name; Livewire.emit("modalClosed", n) } if (!0 === this.getActiveComponentModalAttribute("destroyOnClose") && Livewire.emit("destroyComponent", this.activeComponent), e > 0) for (var i = 0; i < e; i++) { if (o) { var r = this.componentHistory[this.componentHistory.length - 1]; Livewire.emit("destroyComponent", r) } this.componentHistory.pop() } var s = this.componentHistory.pop(); s && !1 === t && s ? this.setActiveModalComponent(s, !0) : this.setShowPropertyTo(!1) } }, setActiveModalComponent: function (t) { var e = this, o = arguments.length > 1 && void 0 !== arguments[1] && arguments[1]; if (this.setShowPropertyTo(!0), this.activeComponent !== t) { !1 !== this.activeComponent && !1 === o && this.componentHistory.push(this.activeComponent); var n = 50; !1 === this.activeComponent ? (this.activeComponent = t, this.showActiveComponent = !0, this.modalWidth = this.getActiveComponentModalAttribute("maxWidthClass")) : (this.showActiveComponent = !1, n = 400, setTimeout((function () { e.activeComponent = t, e.showActiveComponent = !0, e.modalWidth = e.getActiveComponentModalAttribute("maxWidthClass") }), 300)), this.$nextTick((function () { var o, i = null === (o = e.$refs[t]) || void 0 === o ? void 0 : o.querySelector("[autofocus]"); i && setTimeout((function () { i.focus() }), n) })) } }, focusables: function () { return t(this.$el.querySelectorAll("a, button, input, textarea, select, details, [tabindex]:not([tabindex='-1'])")).filter((function (t) { return !t.hasAttribute("disabled") })) }, firstFocusable: function () { return this.focusables()[0] }, lastFocusable: function () { return this.focusables().slice(-1)[0] }, nextFocusable: function () { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() }, prevFocusable: function () { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() }, nextFocusableIndex: function () { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) }, prevFocusableIndex: function () { return Math.max(0, this.focusables().indexOf(document.activeElement)) - 1 }, setShowPropertyTo: function (t) { var e = this; this.show = t, t ? document.body.classList.add("overflow-y-hidden") : (document.body.classList.remove("overflow-y-hidden"), setTimeout((function () { e.activeComponent = !1, e.$wire.resetState() }), 300)) }, init: function () { var t = this; this.modalWidth = this.getActiveComponentModalAttribute("maxWidthClass"), Livewire.on("closeModal", (function () { var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0], o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0, n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2]; t.closeModal(e, o, n) })), Livewire.on("activeModalComponentChanged", (function (e) { t.setActiveModalComponent(e) })) } } } }, 754: () => { } }, o = {}; function n(t) { var i = o[t]; if (void 0 !== i) return i.exports; var r = o[t] = { exports: {} }; return e[t](r, r.exports, n), r.exports } n.m = e, t = [], n.O = (e, o, i, r) => { if (!o) { var s = 1 / 0; for (u = 0; u < t.length; u++) { for (var [o, i, r] = t[u], a = !0, c = 0; c < o.length; c++)(!1 & r || s >= r) && Object.keys(n.O).every((t => n.O[t](o[c]))) ? o.splice(c--, 1) : (a = !1, r < s && (s = r)); if (a) { t.splice(u--, 1); var l = i(); void 0 !== l && (e = l) } } return e } r = r || 0; for (var u = t.length; u > 0 && t[u - 1][2] > r; u--)t[u] = t[u - 1]; t[u] = [o, i, r] }, n.o = (t, e) => Object.prototype.hasOwnProperty.call(t, e), (() => { var t = { 387: 0, 109: 0 }; n.O.j = e => 0 === t[e]; var e = (e, o) => { var i, r, [s, a, c] = o, l = 0; if (s.some((e => 0 !== t[e]))) { for (i in a) n.o(a, i) && (n.m[i] = a[i]); if (c) var u = c(n) } for (e && e(o); l < s.length; l++)r = s[l], n.o(t, r) && t[r] && t[r][0](), t[r] = 0; return n.O(u) }, o = self.webpackChunk = self.webpackChunk || []; o.forEach(e.bind(null, 0)), o.push = e.bind(null, o.push.bind(o)) })(), n.O(void 0, [109], (() => n(331))); var i = n.O(void 0, [109], (() => n(754))); i = n.O(i) })();</script>
 
             <div x-data="LivewireUIModal()" x-init="init()" x-on:close.stop="setShowPropertyTo(false)"
@@ -283,7 +284,7 @@
                 id="community-navbar-container">
                 <div class="flex items-center justify-between py-4 md:justify-start md:space-x-10">
                     <div class="flex items-center justify-start">
-                        <a id="community-navbar-link-logo" href="https://gentoi.online" class="w-auto">
+                        <a id="community-navbar-link-logo" href="https://gentoi.online" class="w-auto" rel="nofollow noopener noreferrer" target="_blank">
                             <span class="sr-only">Noclip</span>
 
                             <img class="object-contain select-none pointer-events-none m-auto w-8 h-8 rounded"
@@ -305,7 +306,7 @@
                     </div>
 
                     <div class="items-center justify-end hidden space-x-4 md:flex md:flex-1 lg:w-0">
-                        <a id="community-navbar-link-members" href="https://gentoi.online/users"
+                        <a id="community-navbar-link-members" href="https://gentoi.online/users" rel="nofollow noopener noreferrer" target="_blank"
                             class="text-base font-medium motion-safe:transition text-neutral-500 hover:text-primary-500 dark:text-neutral-100 !text-neutral-100">
                             Members
                         </a>
@@ -316,7 +317,7 @@
                             Store
                         </a>
 
-                        <a id="community-navbar-link-discord" href="https://discord.gg/f3pQ5HnQv5"
+                        <a id="community-navbar-link-discord" href="https://discord.gg/f3pQ5HnQv5" rel="nofollow noopener noreferrer" target="_blank"
                         class="text-base font-medium motion-safe:transition text-neutral-500 hover:text-primary-500 dark:text-neutral-100 !text-neutral-100">
                         Discord
                         </a>
@@ -380,28 +381,26 @@
                     </div>
                     <div class="mt-6">
                         <nav class="grid gap-y-8">
-                            <a href="https://gentoi.online/users"
+                            <a href="https://gentoi.online/users" rel="nofollow noopener noreferrer" target="_blank"
                                 class="flex items-center p-3 -m-3 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800">
                                 <svg class="flex-shrink-0 w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                     aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg> <span class="ml-3 text-base font-medium text-neutral-900 dark:text-neutral-100">
                                     Members
                                 </span>
                             </a>
 
-                            <a href="https://pillpack.noclip.me/servers"
+                            <a href="https://discord.gg/f3pQ5HnQv5"
                                 class="flex items-center p-3 -m-3 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800">
                                 <svg class="flex-shrink-0 w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" viewBox="0 0 192 192" stroke-width="14" stroke="currentColor"
                                     aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
-                                    </path>
-                                </svg> <span class="ml-3 text-base font-medium text-neutral-900 dark:text-neutral-100">
-                                    Servers
+                                    d="m68 138-8 16c-10.19-4.246-20.742-8.492-31.96-15.8-3.912-2.549-6.284-6.88-6.378-11.548-.488-23.964 5.134-48.056 19.369-73.528 1.863-3.334 4.967-5.778 8.567-7.056C58.186 43.02 64.016 40.664 74 39l6 11s6-2 16-2 16 2 16 2l6-11c9.984 1.664 15.814 4.02 24.402 7.068 3.6 1.278 6.704 3.722 8.567 7.056 14.235 25.472 19.857 49.564 19.37 73.528-.095 4.668-2.467 8.999-6.379 11.548-11.218 7.308-21.769 11.554-31.96 15.8l-8-16m-68-8s20 10 40 10 40-10 40-10"/><ellipse cx="71" cy="101" rx="13" ry="15"/><ellipse cx="121" cy="101" rx="13" ry="15"/></svg> <span class="ml-3 text-base font-medium text-neutral-900 dark:text-neutral-100">
+                                    Discord
                                 </span>
                             </a>
 
@@ -411,7 +410,7 @@
                                     fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                     aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                 </svg> <span class="ml-3 text-base font-medium text-neutral-900 dark:text-neutral-100">
                                     Store
                                 </span>
@@ -731,8 +730,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js"
         defer=""></script>
-    <script src="/vendor/livewire/livewire.js?id=90730a3b0e7144480175" data-turbo-eval="false"
-        data-turbolinks-eval="false"></script>
+    <script src="./livewire.js" data-turbo-eval="false"
+        data-turbolinks-eval="false"></script> <!-- livewire.js?id=90730a3b0e7144480175 -->
     <script data-turbo-eval="false"
         data-turbolinks-eval="false">window.livewire = new Livewire(); window.Livewire = window.livewire; window.livewire_app_url = ''; window.livewire_token = 'xkVEQEn25Al9ERRvzNM467bTRIChkUVdZPzrTZnu'; window.deferLoadingAlpine = function (callback) { window.addEventListener('livewire:load', function () { callback(); }); }; let started = false; window.addEventListener('alpine:initializing', function () { if (!started) { window.livewire.start(); started = true; } }); document.addEventListener("DOMContentLoaded", function () { if (!started) { window.livewire.start(); started = true; } });</script>
 

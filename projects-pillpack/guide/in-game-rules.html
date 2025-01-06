@@ -38,10 +38,10 @@
     <meta property="og:type" content="website" />
 
 
-    <meta property="og:image"
+    <!-- <meta property="og:image"
         content="https://construct-cdn.physgun.com/BxZwJS3WNTwy5D5V/TJB4ETAXZt97ksCdRuZO4T0NfdQWwZ-metaMS5wbmc=-.png" />
     <meta property="og:url" content="https://pillpack.noclip.me/forums/thread/pill-pack-hide-seek-in-game-rules" />
-    <link rel="canonical" href="https://pillpack.noclip.me/forums/thread/pill-pack-hide-seek-in-game-rules" />
+    <link rel="canonical" href="https://pillpack.noclip.me/forums/thread/pill-pack-hide-seek-in-game-rules" /> -->
 
 
     <meta name="twitter:card" content="summary_large_image">
@@ -117,7 +117,10 @@
 
 
     <style>
-
+        .external-link::after {
+            content: url("../../media/external-link.svg");
+            /* margin-left: 1px; */
+        }
     </style>
 
     <script>
@@ -214,7 +217,7 @@
                 id="community-navbar-container">
                 <div class="flex items-center justify-between py-4 md:justify-start md:space-x-10">
                     <div class="flex items-center justify-start">
-                        <a id="community-navbar-link-logo" href="https://gentoi.online" class="w-auto">
+                        <a id="community-navbar-link-logo" href="https://gentoi.online" class="w-auto" rel="nofollow noopener noreferrer" target="_blank">
                             <span class="sr-only">Noclip</span>
 
                             <img class="object-contain select-none pointer-events-none m-auto w-8 h-8 rounded"
@@ -236,7 +239,7 @@
                     </div>
 
                     <div class="items-center justify-end hidden space-x-4 md:flex md:flex-1 lg:w-0">
-                        <a id="community-navbar-link-members" href="https://gentoi.online/users"
+                        <a id="community-navbar-link-members" href="https://gentoi.online/users" rel="nofollow noopener noreferrer" target="_blank"
                             class="text-base font-medium motion-safe:transition text-neutral-500 hover:text-primary-500 dark:text-neutral-100">
                             Members
                         </a>
@@ -247,7 +250,7 @@
                             Store
                         </a>
 
-                        <a id="community-navbar-link-discord" href="https://discord.gg/f3pQ5HnQv5"
+                        <a id="community-navbar-link-discord" href="https://discord.gg/f3pQ5HnQv5" rel="nofollow noopener noreferrer" target="_blank"
                         class="text-base font-medium motion-safe:transition text-neutral-500 hover:text-primary-500 dark:text-neutral-100 !text-neutral-100">
                         Discord
                         </a>
@@ -278,7 +281,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <img class="object-contain select-none pointer-events-none m-auto w-8 h-8 rounded"
-                                src="https://construct-cdn.physgun.com/UC-1zLODFqIVEhfL/BzKb9OXGybd4D3DxU5onnouUkIlTS7-metaNDgzNDYyICgxKS5wbmc=-.png"
+                                src="../media/rank-icons/logo.png"
                                 alt="pillpack" loading="lazy" />
                         </div>
                         <div class="-mr-2">
@@ -294,7 +297,7 @@
                     </div>
                     <div class="mt-6">
                         <nav class="grid gap-y-8">
-                            <a href="https://pillpack.noclip.me/members"
+                            <a href="https://gentoi.online/users" rel="nofollow noopener noreferrer" target="_blank"
                                 class="flex items-center p-3 -m-3 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800">
                                 <svg class="flex-shrink-0 w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -306,19 +309,18 @@
                                 </span>
                             </a>
 
-                            <a href="https://pillpack.noclip.me/servers"
+                            <a href="https://discord.gg/f3pQ5HnQv5"
                                 class="flex items-center p-3 -m-3 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800">
                                 <svg class="flex-shrink-0 w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" viewBox="0 0 192 192" stroke-width="14" stroke="currentColor"
                                     aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-                                </svg> <span class="ml-3 text-base font-medium text-neutral-900 dark:text-neutral-100">
-                                    Servers
+                                    d="m68 138-8 16c-10.19-4.246-20.742-8.492-31.96-15.8-3.912-2.549-6.284-6.88-6.378-11.548-.488-23.964 5.134-48.056 19.369-73.528 1.863-3.334 4.967-5.778 8.567-7.056C58.186 43.02 64.016 40.664 74 39l6 11s6-2 16-2 16 2 16 2l6-11c9.984 1.664 15.814 4.02 24.402 7.068 3.6 1.278 6.704 3.722 8.567 7.056 14.235 25.472 19.857 49.564 19.37 73.528-.095 4.668-2.467 8.999-6.379 11.548-11.218 7.308-21.769 11.554-31.96 15.8l-8-16m-68-8s20 10 40 10 40-10 40-10"/><ellipse cx="71" cy="101" rx="13" ry="15"/><ellipse cx="121" cy="101" rx="13" ry="15"/></svg> <span class="ml-3 text-base font-medium text-neutral-900 dark:text-neutral-100">
+                                    Discord
                                 </span>
                             </a>
 
-                            <a rel="nofollow noopener noreferrer" target="_blank" href="https://gentoi.com/H&amp;Store/"
+                            <a rel="nofollow noopener noreferrer" target="_blank" href="https://gentoi.online/store/packages/1"
                                 class="flex items-center p-3 -m-3 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-800">
                                 <svg class="flex-shrink-0 w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -397,7 +399,7 @@
                         <div class="space-x-2 flex items-center">
                         </div>
                     </div>
-                    <div style="background-color: rgb(204, 204, 23);" class="text-sm text-black focus:outline-none font-semibold h-9 px-3 rounded-lg inline-flex items-center justify-center bg-primary-500 highlight-white/20 hover:bg-primary-400">WARNING: The page content is set to be rewritten in the future</div>
+                    <!-- <div style="background-color: rgb(204, 204, 23);" class="text-sm text-black focus:outline-none font-semibold h-9 px-3 rounded-lg inline-flex items-center justify-center bg-primary-500 highlight-white/20 hover:bg-primary-400">WARNING: The page content is set to be rewritten in the future</div> -->
                 </div>
 
                 <div
@@ -409,8 +411,32 @@
                         <div class="w-full h-full grid grid-cols-1">
 
                             <article class="flex flex-col">
-                                
                                 <div
+                                    class="prose prose-neutral dark:prose-invert break-words whitespace-normal max-w-none flex-grow p-4">
+                                    <h3>THESE RULES ALSO APPLY TO THE DISCORD SERVER</h3>
+                                    <p><code>1.</code><span style="color:rgb(219,222,225);"> No spamming or causing any kind of nuisance or inconvenience.</span></p>
+                                    <p><code>2.</code><span style="color:rgb(219,222,225);"> No DM advertising or advertising in general chats. (#server-content and #server-clips are exceptions, promoting the official PPHNS discord server and sharing clips of the GMod server are exceptions)</span></p>
+                                    <p><code>3.</code><span style="color:rgb(219,222,225);"> No begging for staff.</span></p>
+                                    <p><code>4.</code><span style="color:rgb(219,222,225);"> No NSFW content/material or intentions (there are children on this server, be respectful).</span></p>
+                                    <p><code>5.</code><span style="color:rgb(219,222,225);"> No pinging excessively or you will be muted.</span>
+                                    </p>
+                                    <p><code>6.</code><span style="color:rgb(219,222,225);"> Do not sexualize or bully someone in any means.</span></p>
+                                    <p><code>7.</code><span style="color:rgb(219,222,225);"> No doxxing or exploiting any kind of private information.</span></p>
+                                    <p><code>8.</code><span style="color:rgb(219,222,225);"> Do not impersonate any individuals on the server. Abuse of this will result in kick or ban.</span></p>
+                                    <p><code>9.</code><span style="color:rgb(219,222,225);"> Use the correct chats for their intended purposes.</span></p>
+                                    <p><code>10.</code><span style="color:rgb(219,222,225);"> No discrimination against anyone based on race, sexuality, gender, etc. (slurs included)</span></p>
+                                    <p><code>11.</code><span style="color:rgb(219,222,225);"> No abuse of glitches/hacks, it will result in a warning or ban depending on the severity of the offense.</span></p>
+                                    <p><code>12.</code><span style="color:rgb(219,222,225);"> Do not spam ping owners or Youtubers.</span>
+                                    </p>
+                                    <p><code>13.</code><span style="color:rgb(219,222,225);"> Communicate only in English and avoid controversial or political topics.</span></p>
+                                    <p><code>14.</code><span style="color:rgb(219,222,225);"> Be sure to also follow Garry's Mod's Terms of Service and Community Guidelines. LINK: <a class="external-link" href="https://store.steampowered.com/eula/4000_eula_0">https://store.steampowered.com/eula/4000_eula_0</a> The same goes with Steam's ToS as well. LINK: <a class="external-link" href="https://store.steampowered.com/subscriber_agreement">https://store.steampowered.com/subscriber_agreement</a></span></p>
+                                    <p><code>15.</code><span style="color:rgb(219,222,225);"> Have fun and enjoy your time on the server <3</span></p>
+                                    <p><code>FYI</code><span style="color:rgb(219,222,225);"> Any rule not listed here is up to staff discretion. With that in mind, please see the Punishment General Guidelines. LINK: <a href="./staff-commands-and-punishment.html">https://setnour6.github.io/projects-pillpack/guide/staff-commands-and-punishment.html</a></span></p>
+                                    <p><code>TIP</code><span style="color:rgb(219,222,225);"> Recording is allowed on
+                                            the server and playing on it has the added chance of you being in someone
+                                            elses videos</span></p>
+                                </div>
+                                <!-- <div
                                     class="prose prose-neutral dark:prose-invert break-words whitespace-normal max-w-none flex-grow p-4">
                                     <p><code>1.</code><span style="color:rgb(219,222,225);"> Don't tunnel</span></p>
                                     <p><code>2.</code><span style="color:rgb(219,222,225);"> Don't Ghost</span></p>
@@ -453,7 +479,7 @@
                                     <p><code>TIP</code><span style="color:rgb(219,222,225);"> Recording is allowed on
                                             the server and playing on it has the added chance of you being in someone
                                             elses videos</span></p>
-                                </div>
+                                </div> -->
                             </article>
 
                             
@@ -463,7 +489,7 @@
                     <div class="absolute top-0 right-0 w-full h-full z-10  highlight-white/5  rounded-xl"></div>
                 </div>
 
-                <div wire:id="ikqt5bXD6VC9edyNpKCC"
+                <!-- <div wire:id="ikqt5bXD6VC9edyNpKCC"
                     wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;ikqt5bXD6VC9edyNpKCC&quot;,&quot;name&quot;:&quot;tenant.forums.comment.components.list-comments&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;forums\/thread\/pill-pack-hide-seek-in-game-rules&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;comment.created&quot;,&quot;comment.deleted&quot;],&quot;path&quot;:&quot;https:\/\/pillpack.noclip.me\/forums\/thread\/pill-pack-hide-seek-in-game-rules&quot;},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;28371ae7&quot;,&quot;data&quot;:{&quot;thread&quot;:[],&quot;user&quot;:null,&quot;page&quot;:1,&quot;paginators&quot;:{&quot;page&quot;:1}},&quot;dataMeta&quot;:{&quot;models&quot;:{&quot;thread&quot;:{&quot;class&quot;:&quot;App\\Models\\Thread&quot;,&quot;id&quot;:&quot;_Ug0ihbWqF5ebCGu&quot;,&quot;relations&quot;:[&quot;board&quot;,&quot;board.category&quot;,&quot;author&quot;,&quot;author.media&quot;,&quot;author.userRoles&quot;,&quot;author.threads&quot;,&quot;author.comments&quot;,&quot;media&quot;,&quot;likes&quot;],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}}},&quot;checksum&quot;:&quot;5c9982acda6ce3e8b91ed7413220d5cd7157c4eb5be5e102388f2f67d45141ff&quot;}}"
                     class="space-y-8">
                     <div>
@@ -472,7 +498,7 @@
                     <div>
                     </div>
 
-                </div>
+                </div> -->
 
                 <!-- Livewire Component wire-end:ikqt5bXD6VC9edyNpKCC -->
             </div>
@@ -513,8 +539,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js"
         defer></script>
-    <script src="/vendor/livewire/livewire.js?id=90730a3b0e7144480175" data-turbo-eval="false"
-        data-turbolinks-eval="false"></script>
+    <script src="./livewire.js" data-turbo-eval="false"
+        data-turbolinks-eval="false"></script> <!-- livewire.js?id=90730a3b0e7144480175 -->
     <script data-turbo-eval="false"
         data-turbolinks-eval="false">window.livewire = new Livewire(); window.Livewire = window.livewire; window.livewire_app_url = ''; window.livewire_token = 'F1FGegzAZHTHj1o0dp618vOrIjYQoXvnWCf9sBvK'; window.deferLoadingAlpine = function (callback) { window.addEventListener('livewire:load', function () { callback(); }); }; let started = false; window.addEventListener('alpine:initializing', function () { if (!started) { window.livewire.start(); started = true; } }); document.addEventListener("DOMContentLoaded", function () { if (!started) { window.livewire.start(); started = true; } });</script>
 
