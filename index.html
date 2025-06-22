@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="index-style.css">
     <title>Setnour6's Page</title>
     <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
         h1 {
             margin-bottom: 50px;
         }
@@ -28,7 +17,22 @@
     </style>
 </head>
 <body>
-    <h1>Setnour6</h1>
+    <!-- <h1>Setnour6</h1> -->
+    <div class="logo-container">
+        <img src="./media/setnour6-logo.png" alt="Setnour6" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <h1 class="logo-text">Setnour6</h1>
+    </div>
+    
+    <div class="bios">
+        <section class="bio-card youtube">
+            <h2>YouTube</h2>
+            <p>Music.</p>
+        </section>
+        <section class="bio-card spotify">
+            <h2>Spotify</h2>
+            <p>Also Music.</p>
+        </section>
+    </div>
     <!-- <p>...</p> -->
     <div class="navbar">
         <div class="dropdown">
@@ -46,5 +50,204 @@
             </div>
         </div>
     </div>
+    <audio id="effectSound" src="./media/effect.mp3" preload="auto"></audio>
+    <div id="bubbleContainer"></div>
+    <div class="hello-text">Hello!</div>
 </body>
+<script>
+    document.querySelectorAll('.bio-card').forEach(card => {
+        card.addEventListener('animationend', () => {
+            card.classList.add('reveal');
+        });
+    });
+</script>
+<script>
+    const logo = document.querySelector('.logo');
+    const logoText = document.querySelector('.logo-text');
+    const bubbleContainer = document.getElementById('bubbleContainer');
+    const sound = document.getElementById('effectSound');
+    const helloText = document.querySelector('.hello-text');
+    
+    logo.addEventListener('click', () => {
+        // Quick blur flash
+        document.body.classList.add('blur-active');
+        setTimeout(() => {
+            document.body.classList.remove('blur-active');
+        }, 1000);
+    
+        // Play sound
+        sound.currentTime = 0;
+        sound.play();
+    
+        // Animate logo
+        logo.style.animation = 'scaleFade 2s forwards';
+        logoText.style.animation = 'scaleFade 2s forwards';
+    
+        // Create swirling colorful flowers
+        createFlowerParticles(120); // more particles
+        createFlowerParticlesFromLogo(60);
+    
+        // Show hello text after fade
+        setTimeout(() => {
+            helloText.style.display = 'block';
+        }, 1500);
+    });
+    
+    function createFlowerParticles(count) {
+        for (let i = 0; i < count; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'flower-petal';
+
+            const side = Math.floor(Math.random() * 4);
+            let startX, startY;
+            switch (side) {
+                case 0: // Top
+                    startX = Math.random() * window.innerWidth;
+                    startY = -20;
+                    break;
+                case 1: // Right
+                    startX = window.innerWidth + 20;
+                    startY = Math.random() * window.innerHeight;
+                    break;
+                case 2: // Bottom
+                    startX = Math.random() * window.innerWidth;
+                    startY = window.innerHeight + 20;
+                    break;
+                case 3: // Left
+                    startX = -20;
+                    startY = Math.random() * window.innerHeight;
+                    break;
+            }
+
+            petal.style.left = '0px';
+            petal.style.top = '0px';
+            bubbleContainer.appendChild(petal);
+
+            const hue = Math.floor(Math.random() * 360);
+            petal.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 70%), hsl(${hue}, 100%, 40%))`;
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            let x = startX;
+            let y = startY;
+
+            const dx = (centerX - x) / 100 + (Math.random() - 0.5) * 4;
+            const dy = (centerY - y) / 100 + (Math.random() - 0.5) * 4;
+            const swirl = (Math.random() - 0.5) * 0.1;
+
+            let angle = Math.random() * Math.PI * 2;
+            let scale = 0.8;
+            let opacity = 1;
+            let blur = 0;
+            let life = 0;
+
+            function animate() {
+                life += 1;
+                angle += swirl;
+                x += dx + Math.cos(angle) * 2;
+                y += dy + Math.sin(angle) * 2;
+                scale += 0.01;
+                opacity -= 0.01;
+                blur += 0.2;
+
+                petal.style.transform = `translate(${x}px, ${y}px) scale(${scale}) rotate(${angle}rad)`;
+                petal.style.opacity = opacity;
+                petal.style.filter = `blur(${blur}px)`;
+
+                if (opacity <= 0 || life > 200) {
+                    petal.remove();
+                    return;
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    }
+    function createFlowerParticlesFromLogo(count) {
+        for (let i = 0; i < count; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'flower-petal';
+
+            const side = Math.floor(Math.random() * 4);
+            let startX, startY;
+            switch (side) {
+                case 0: // Top
+                    startX = Math.random() * window.innerWidth;
+                    startY = -20;
+                    break;
+                case 1: // Right
+                    startX = window.innerWidth + 20;
+                    startY = Math.random() * window.innerHeight;
+                    break;
+                case 2: // Bottom
+                    startX = Math.random() * window.innerWidth;
+                    startY = window.innerHeight + 20;
+                    break;
+                case 3: // Left
+                    startX = -20;
+                    startY = Math.random() * window.innerHeight;
+                    break;
+            }
+
+            petal.style.left = '0px';
+            petal.style.top = '0px';
+            bubbleContainer.appendChild(petal);
+
+            const hue = Math.floor(Math.random() * 360);
+            petal.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 70%), hsl(${hue}, 100%, 40%))`;
+
+            // const centerX = window.innerWidth / 2;
+            // const centerY = window.innerHeight / 2;
+            const logoRect = logo.getBoundingClientRect();
+            const centerX = logoRect.left + logoRect.width / 2;
+            const centerY = logoRect.top + logoRect.height / 2;
+
+            let x = startX;
+            let y = startY;
+
+            const dx = (centerX - x) / 100 + (Math.random() - 0.5) * 4;
+            const dy = (centerY - y) / 100 + (Math.random() - 0.5) * 4;
+            const swirl = (Math.random() - 0.5) * 0.1;
+
+            let angle = Math.random() * Math.PI * 2;
+            let scale = 0.8;
+            let opacity = 0;
+            let blur = 0;
+            let life = 0;
+
+            function animate() {
+                life += 1;
+                angle += swirl;
+                // x += dx + Math.cos(angle) * 2;
+                // y += dy + Math.sin(angle) * 2;
+                angle += swirl;
+                const radius = 50 + life * 1.5; // spiral outward
+                x = centerX + Math.cos(angle) * radius;
+                y = centerY + Math.sin(angle) * radius;
+                scale += 0.01;
+                opacity -= 0.01;
+                blur += 0.2;
+
+                petal.style.transform = `translate(${x}px, ${y}px) scale(${scale}) rotate(${angle}rad)`;
+                petal.style.opacity = opacity;
+                petal.style.filter = `blur(${blur}px)`;
+                petal.style.zIndex = "5";
+
+                if (opacity <= 0 || life > 200) {
+                    petal.remove();
+                    return;
+                }
+
+                requestAnimationFrame(animate);
+            }
+            while (opacity < 1) {
+                opacity += 0.0001;
+            }
+            animate();
+        }
+    }
+</script>
 </html>
