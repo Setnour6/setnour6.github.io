@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="index-style.css">
     <title>Setnour6's Page</title>
     <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
         h1 {
             margin-bottom: 50px;
         }
@@ -26,11 +15,176 @@
             right: 20px;
         }
     </style>
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+        <defs>
+            <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" /> <!-- stdDeviation="4" for less blurring and more pronounced appearances. synergise with css: "#grid-layer .grid-bubble" -->
+            <feColorMatrix in="blur" mode="matrix"
+                values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 18 -7
+                " result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
 </head>
 <body>
-    <h1>Setnour6</h1>
-    <!-- <p>...</p> -->
-    <div class="navbar">
+    <div id="bubble-bg">
+        <div id="grid-layer"></div>
+        <div id="meta-layer"></div>
+    </div>
+    <!-- <h1>Setnour6</h1> -->
+    <div class="logo-container">
+        <img src="./media/setnour6-logo.png" alt="Setnour6" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <h1 class="logo-text">Setnour6</h1>
+    </div>
+    <div id="hamburger" class="hamburger rainbow-border">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div id="sidebar" class="sidebar">
+        <section>
+            <h3>Projects</h3>
+            <a href="projects-pillpack/main.html">
+                <img src="media/garrys-mod.svg" alt="GMod" class="icon"> Pill Pack Hide and Seek
+            </a>
+        </section>
+
+        <section>
+            <h3>Social Media</h3>
+            <a href="https://github.com/Setnour6">
+                <img src="media/github2.svg" alt="GitHub" class="icon"> GitHub
+            </a>
+            <a href="https://www.youtube.com/setnour6">
+                <img src="media/youtube.svg" alt="YouTube" class="icon"> YouTube
+            </a>
+            <a href="https://open.spotify.com/artist/11NVbkRA1o8RmPxASj8XHm?si=qPMSkAmQR5SIdNzYcz5tOg">
+                <img src="media/spotify.svg" alt="Spotify" class="icon"> Spotify
+            </a>
+            <a href="https://setnour6.bandcamp.com/">
+                <img src="media/bandcamp.svg" alt="Bandcamp" class="icon"> Bandcamp
+            </a>
+            <a href="https://soundcloud.com/setnour6">
+                <img src="media/soundcloud.svg" alt="Soundcloud" class="icon"> Soundcloud
+            </a>
+            <a href="https://genius.com/artists/Setnour6">
+                <img src="media/genius.svg" alt="Genius" class="icon"> Genius
+            </a>
+            <a href="https://steamcommunity.com/id/setnour6/">
+                <img src="media/steam.svg" alt="Steam" class="icon"> Steam
+            </a>
+            <a href="https://www.instagram.com/this_is_setnour6/?hl=en">
+                <img src="media/instagram.svg" alt="Instagram" class="icon"> Instagram
+            </a>
+            <a href="https://ko-fi.com/setnour6">
+                <img src="media/kofi.svg" alt="Kofi" class="icon"> Ko-Fi
+            </a>
+        </section>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        let hasOpened = false;
+
+        const closeSidebar = () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        hamburger.classList.remove('open');
+        };
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+            hamburger.classList.toggle('open');
+
+            if (!hasOpened) {
+                hamburger.classList.remove('rainbow-border');
+                hasOpened = true;
+            }
+        });
+
+        overlay.addEventListener('click', () => {
+            closeSidebar();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+        (function() {
+        const W         = window.innerWidth;
+        const H         = window.innerHeight;
+        const SPACING   = 20;
+        const GRID_OFF  = SPACING/2;
+        const METACOUNT = 100;
+
+        const gridLayer = document.getElementById('grid-layer');
+        const metaLayer = document.getElementById('meta-layer');
+
+        // 1) build the rotated grid
+        const BUF = Math.hypot(W / 3, H / 3);
+        for (let y = -BUF + GRID_OFF; y < H + BUF; y += SPACING) {
+            for (let x = -BUF + GRID_OFF; x < W + BUF; x += SPACING) {
+            const dot = document.createElement('div');
+            dot.className  = 'grid-bubble';
+            dot.style.left = `${x - 4}px`;
+            dot.style.top  = `${y - 4}px`;
+            gridLayer.appendChild(dot);
+            }
+        }
+
+        // 2) create metaballs with fully randomized start positions
+        const metas = [];
+        for (let i = 0; i < METACOUNT; i++) {
+            const m = document.createElement('div');
+            m.className = 'metaball';
+
+            // random diameter between 20–60px
+            const size = 20 + Math.random() * 40;
+            m.style.width  = `${size}px`;
+            m.style.height = `${size}px`;
+
+            // FULLY random start inside viewport
+            m.x = Math.random() * W;
+            m.y = Math.random() * H;
+
+            // upward speed
+            m.vy = 0.3 + Math.random() * 0.7;
+
+            metaLayer.appendChild(m);
+            metas.push(m);
+        }
+
+        // 3) animate straight up, loop at bottom
+        function tick() {
+            for (let m of metas) {
+            m.y -= m.vy;
+            if (m.y < -parseFloat(m.style.height)) {
+                // re-entry at bottom, new random X
+                m.y = H + Math.random() * 50;
+                m.x = Math.random() * W;
+            }
+            m.style.transform = `translate(${m.x}px, ${m.y}px)`;
+            }
+            requestAnimationFrame(tick);
+        }
+        tick();
+
+        // 4) rebuild on resize
+        window.addEventListener('resize', () => location.reload());
+    })();
+    </script>
+    <!-- BELOW IS THE OLD CONTENT BEFORE THE MAJOR INDEX REDESIGN, KEPT FOR HISTORICAL PURPOSES -->
+    <!-- <div class="navbar">
         <div class="dropdown">
             <button class="dropbtn">Projects</button>
             <div class="dropdown-content" style="min-width: 110px;">
@@ -45,6 +199,6 @@
                 <a href="https://github.com/Setnour6">GitHub</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>

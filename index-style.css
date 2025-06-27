@@ -1,6 +1,283 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    transition: filter 0.6s ease-in-out;
+    filter: none;
+}
 h1 {
     margin-bottom: 50px;
 }
+
+#bubble-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    filter: url(#goo);
+}
+
+#grid-layer {
+    position: absolute;
+    inset: 0;
+    transform: rotate(40deg);
+    transform-origin: center center;
+}
+
+#grid-layer .grid-bubble {
+    position: absolute;
+    width: 8px; height: 8px;
+    border: 1px solid rgba(50,100,200,0.5);
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+#meta-layer {
+    position: absolute;
+    inset: 0;
+}
+
+#meta-layer .metaball {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(50, 50, 250, 0.4);
+    pointer-events: none;
+}
+
+.logo-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeSlideIn 1.2s ease-out;
+    z-index: 50;
+}
+.logo {
+    max-width: 250px;
+    height: auto;
+    animation: popIn 1s ease forwards;
+    z-index: 50;
+}
+.logo-text {
+    font-size: 64px;
+    font-weight: bold;
+    display: none;
+    animation: popIn 1s ease forwards;
+    z-index: 50;
+}
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.hamburger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 40px;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 999;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.hamburger::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 10px;
+    z-index: -1;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 154, 0, 1) 5%,
+        rgba(208, 222, 33, 1) 10%,
+        rgba(79, 220, 74, 1) 15%,
+        rgba(63, 218, 216, 1) 20%,
+        rgba(47, 201, 226, 1) 25%,
+        rgba(28, 127, 238, 1) 30%,
+        rgba(95, 21, 242, 1) 35%,
+        rgba(186, 12, 248, 1) 40%,
+        rgba(251, 7, 217, 1) 45%,
+        rgba(255, 0, 0, 1) 50%,
+        rgba(255, 154, 0, 1) 55%,
+        rgba(208, 222, 33, 1) 60%,
+        rgba(79, 220, 74, 1) 65%,
+        rgba(63, 218, 216, 1) 70%,
+        rgba(47, 201, 226, 1) 75%,
+        rgba(28, 127, 238, 1) 80%,
+        rgba(95, 21, 242, 1) 85%,
+        rgba(186, 12, 248, 1) 90%,
+        rgba(251, 7, 217, 1) 95%,
+        rgba(255, 0, 0, 1) 100%
+    );
+    background-size: 200% 200%;
+    animation: rainbowLinear 4s linear infinite;
+
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    padding: 2px;
+    box-sizing: border-box;
+    display: none;
+}
+
+.hamburger.rainbow-border::before {
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes rainbowLinear {
+    0%   { background-position: 0% 0%; }
+    100%  { background-position: 100% 100%; }
+}
+
+/* .hamburger.rainbow-border {
+    animation: rainbow-border 4s infinite;
+} */
+
+.hamburger span {
+    height: 2px;
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translateY(6px) translateX(4px) scaleX(1.4);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-6px) translateX(4px) scaleX(1.4);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100%;
+    background: #1e1e1e;
+    backdrop-filter: blur(20px);
+    box-shadow: -8px 0 20px rgba(0, 0, 0, 0.6);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 998;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar.open {
+    transform: translateX(25%);
+}
+
+.sidebar h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaaaaa;
+    margin: 0 0 8px 0;
+    padding-left: 4px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.sidebar a:hover {
+    background-color: #333;
+    transform: translateX(2px);
+}
+
+.sidebar a .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.sidebar section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: -8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* background: rgba(0, 0, 0, 0.4); */
+    z-index: 997;
+    display: none;
+}
+
+.overlay.show {
+    display: block;
+}
+
+/** BELOW IS OLD STYLES FROM BEFORE THE MAJOR INDEX REDESIGN, KEPT FOR REFERENCE AND HISTORICAL PURPOSES **/
 .navbar ul {
     list-style: none;
     padding: 0;
