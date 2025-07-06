@@ -343,14 +343,24 @@ if (savedVolume !== null) {
     volumeControl.value = savedVolume;
     bgMusic.volume = parseFloat(savedVolume);
 } else {
-    volumeControl.value = 0.5;
-    bgMusic.volume = 0.5;
+    volumeControl.value = 1;
+    bgMusic.volume = 1;
 }
+
+const volumeDisplay = document.querySelector('.volume-display');
+
+// Add this after setting up the volume control
+function updateVolumeDisplay() {
+    const volume = volumeControl.value;
+    volumeDisplay.style.width = `${volume * 160}px`;
+}
+updateVolumeDisplay();
 
 volumeControl.addEventListener('input', (e) => {
     const volume = e.target.value;
     bgMusic.volume = volume;
     localStorage.setItem('musicVolume', volume);
+    updateVolumeDisplay();
     
     if (isMusicMuted && volume > 0) {
         isMusicMuted = false;

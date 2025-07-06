@@ -494,6 +494,78 @@ h1 {
     transform: rotate(45deg) scaleX(1);
 }
 
+.volume-container {
+    position: relative;
+    height: 30px;
+    margin: 8px 0;
+}
+
+#volume-control {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 160px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(60, 60, 60, 0.7);
+    outline: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+#volume-control::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: 2px solid #2a2a2a;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.1s ease;
+}
+
+#volume-control::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+#volume-control::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: 2px solid #2a2a2a;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.1s ease;
+}
+
+#volume-control::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.volume-display {
+    position: absolute;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, 
+        rgba(50, 100, 200, 0.6) 0%, 
+        rgba(100, 150, 255, 0.8) 100%);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: width 0.0s ease;
+    pointer-events: none;
+}
+
+.volume-container.rainbow-border::after {
+    display: block;
+}
+
 .focus-mode {
     cursor: none;
     transition: cursor 0.5s ease;
