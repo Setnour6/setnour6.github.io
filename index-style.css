@@ -401,7 +401,9 @@ h1 {
     position: fixed;
     bottom: 80px;
     right: 20px;
-    width: 195px;
+    width: 540px;
+    min-width: 260px;
+    max-width: 96vw;
     background: #1e1e1e;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
@@ -642,6 +644,235 @@ h1 {
 
 .overlay.show {
     display: block;
+}
+
+/* Tooltips */
+.tooltip {
+    position: absolute;
+    background: rgba(30,30,30,0.95);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+    z-index: 2000;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    transform: translateY(8px) scale(0.98);
+}
+.tooltip.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Settings panel width responsive */
+.settings-sidebar {
+    width: 540px;
+    min-width: 260px;
+    max-width: 96vw;
+}
+@media (max-width: 600px) {
+    .settings-sidebar {
+        width: 195px;
+        min-width: unset;
+        max-width: 98vw;
+    }
+}
+
+/* Color picker hex grid (desktop) and row (mobile) */
+.color-picker-hex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 12px;
+    margin-top: 2px;
+}
+@media (max-width: 600px) {
+    .color-picker-hex {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0;
+        justify-content: flex-start;
+        margin-bottom: 8px;
+        margin-top: 2px;
+        position: relative;
+        width: 100%;
+    }
+    .color-hex {
+        margin: 0 2px;
+    }
+}
+
+.color-hex {
+    width: 28px;
+    height: 28px;
+    clip-path: polygon(
+        50% 0%,
+        93% 25%,
+        93% 75%,
+        50% 100%,
+        7% 75%,
+        7% 25%
+    );
+    border: 2px solid #fff2;
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px #0002;
+    background: #fff;
+}
+.color-hex.selected {
+    border: 2.5px solid #fff;
+    box-shadow: 0 2px 10px #fff3;
+}
+.color-hex:focus {
+    outline: 2px solid #fff8;
+    border: 2.5px solid #fff;
+}
+
+/* Color picker arrows (mobile) */
+.color-picker-arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background: rgba(40,40,40,0.85);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: background 0.2s;
+}
+.color-picker-arrow:active {
+    background: #222;
+}
+.color-picker-arrow.left { left: -34px; }
+.color-picker-arrow.right { right: -34px; }
+@media (max-width: 600px) {
+    .color-picker-arrow { display: block; }
+}
+
+/* Custom styled checkboxes */
+.switch-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+.switch-label input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #888;
+    border-radius: 5px;
+    background: #232323;
+    margin-right: 6px;
+    position: relative;
+    transition: border 0.2s, background 0.2s;
+    cursor: pointer;
+}
+.switch-label input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #80eaff 60%, #a0ffb8 100%);
+    border: 2px solid #fff;
+}
+.switch-label input[type="checkbox"]:after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 3px auto;
+    border-radius: 2px;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.switch-label input[type="checkbox"]:checked:after {
+    opacity: 1;
+}
+
+/* Tooltip below for hamburger */
+#hamburger + .tooltip, .tooltip.hamburger-below {
+    top: unset !important;
+    bottom: -36px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Subtle hover/active effects for interactive elements */
+.hamburger:hover, .settings:hover, .music-btn:hover, .sidebar a:hover, #focus-mode-btn:hover, #clear-cache:hover {
+    box-shadow: 0 2px 12px rgba(80,180,255,0.10);
+    transform: scale(1.04);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.hamburger:active, .settings:active, .music-btn:active {
+    transform: scale(0.97);
+}
+
+/* Music bubble indicator */
+.music-bubble {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-left: 8px;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #80eaff 60%, #a0ffb8 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px #80eaff99;
+    animation: musicBubblePulse 1.2s infinite cubic-bezier(.4,0,.2,1);
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1001;
+    opacity: 0.85;
+}
+@keyframes musicBubblePulse {
+    0% { transform: translateY(-50%) scale(1); opacity: 0.85; }
+    50% { transform: translateY(-50%) scale(1.18); opacity: 1; }
+    100% { transform: translateY(-50%) scale(1); opacity: 0.85; }
+}
+
+/* Color picker hexagon grid */
+.color-picker-hex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 12px;
+    margin-top: 2px;
+}
+.color-hex {
+    width: 28px;
+    height: 28px;
+    clip-path: polygon(
+        50% 0%,
+        93% 25%,
+        93% 75%,
+        50% 100%,
+        7% 75%,
+        7% 25%
+    );
+    border: 2px solid #fff2;
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px #0002;
+}
+.color-hex.selected {
+    border: 2.5px solid #fff;
+    box-shadow: 0 2px 10px #fff3;
+}
+.color-hex:focus {
+    outline: 2px solid #fff8;
+    border: 2.5px solid #fff;
 }
 
 /** BELOW IS OLD STYLES FROM BEFORE THE MAJOR INDEX REDESIGN, KEPT FOR REFERENCE AND HISTORICAL PURPOSES **/

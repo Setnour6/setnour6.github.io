@@ -472,3 +472,139 @@ document.querySelectorAll('#hamburger, #settings-btn, #music-btn, #exit-focus-bt
         el.addEventListener('mouseenter', showCursor);
         el.addEventListener('touchstart', showCursor);
     });
+
+// Accessibility: add aria-labels and roles
+hamburger.setAttribute('aria-label', 'Open navigation menu');
+hamburger.setAttribute('tabindex', '0');
+hamburger.setAttribute('role', 'button');
+settingsBtn.setAttribute('aria-label', 'Open settings');
+settingsBtn.setAttribute('tabindex', '0');
+settingsBtn.setAttribute('role', 'button');
+musicBtn.setAttribute('aria-label', 'Toggle music');
+musicBtn.setAttribute('tabindex', '0');
+musicBtn.setAttribute('role', 'button');
+
+// Tooltips
+const tooltipMap = {
+    '#hamburger': 'Menu',
+    '#settings-btn': 'Settings',
+    '#music-btn': 'Music',
+    '#focus-mode-btn': 'Focus Mode',
+    '#clear-cache': 'Clear Storage',
+    '#exit-focus-btn': 'Exit Focus Mode',
+};
+let tooltipEl;
+function showTooltip(target, text) {
+    if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.className = 'tooltip';
+        document.body.appendChild(tooltipEl);
+    }
+    tooltipEl.textContent = text;
+    const rect = target.getBoundingClientRect();
+    if (target.id === 'hamburger') {
+        tooltipEl.classList.add('hamburger-below');
+        tooltipEl.style.left = `${rect.left + rect.width / 2 - tooltipEl.offsetWidth / 2}px`;
+        tooltipEl.style.top = `${rect.bottom + 8}px`;
+    } else {
+        tooltipEl.classList.remove('hamburger-below');
+        tooltipEl.style.left = `${rect.left + rect.width / 2 - tooltipEl.offsetWidth / 2}px`;
+        tooltipEl.style.top = `${rect.top - 36}px`;
+    }
+    tooltipEl.classList.add('show');
+}
+function hideTooltip() {
+    if (tooltipEl) tooltipEl.classList.remove('show');
+}
+Object.entries(tooltipMap).forEach(([selector, text]) => {
+    const el = document.querySelector(selector);
+    if (el) {
+        el.addEventListener('mouseenter', () => showTooltip(el, text));
+        el.addEventListener('mouseleave', hideTooltip);
+        el.addEventListener('focus', () => showTooltip(el, text));
+        el.addEventListener('blur', hideTooltip);
+    }
+});
+
+// Color picker hexagon grid (desktop) and row with arrows (mobile)
+const colorOptions = [
+    '#ffffff', '#f5f5dc', '#e0e0e0', '#d1eaff', '#b3e5fc', '#b2dfdb', '#c8e6c9',
+    '#fff9c4', '#ffe0b2', '#ffd1dc', '#f8bbd0', '#e1bee7', '#d7ccc8', '#cfd8dc',
+    '#bdbdbd', '#90caf9', '#80cbc4', '#a5d6a7', '#fff176', '#ffb74d', '#ff8a65',
+    '#ba68c8', '#9575cd', '#7986cb', '#64b5f6', '#4dd0e1', '#4db6ac', '#aed581',
+    '#ffd54f', '#ffb300', '#ff7043', '#f06292', '#ce93d8', '#b0bec5', '#b0b0b0',
+    '#ececec', '#e0e0e0', '#f0f4c3', '#f5f5f5', '#e3f2fd', '#f1f8e9', '#fbe9e7',
+];
+const colorPicker = document.querySelector('.color-picker-hex');
+let selectedBubbleColor = localStorage.getItem('bubbleColor') || '#90caf9';
+let colorPage = 0;
+const COLORS_PER_PAGE = 3;
+function renderColorPicker() {
+    colorPicker.innerHTML = '';
+    const isMobile = window.innerWidth <= 600;
+    let colorsToShow = colorOptions;
+    if (isMobile) {
+        colorsToShow = colorOptions.slice(colorPage * COLORS_PER_PAGE, (colorPage + 1) * COLORS_PER_PAGE);
+        // Add arrows
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'color-picker-arrow left';
+        leftArrow.innerHTML = '&#8592;';
+        leftArrow.disabled = colorPage === 0;
+        leftArrow.onclick = () => { colorPage = Math.max(0, colorPage - 1); renderColorPicker(); };
+        colorPicker.appendChild(leftArrow);
+    }
+    colorsToShow.forEach(color => {
+        const hex = document.createElement('div');
+        hex.className = 'color-hex';
+        hex.tabIndex = 0;
+        hex.style.background = color;
+        if (color === selectedBubbleColor) hex.classList.add('selected');
+        hex.setAttribute('aria-label', `Set bubble color to ${color}`);
+        hex.addEventListener('click', () => setBubbleColor(color));
+        hex.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') setBubbleColor(color);
+        });
+        colorPicker.appendChild(hex);
+    });
+    if (isMobile) {
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'color-picker-arrow right';
+        rightArrow.innerHTML = '&#8594;';
+        rightArrow.disabled = ((colorPage + 1) * COLORS_PER_PAGE) >= colorOptions.length;
+        rightArrow.onclick = () => { colorPage = Math.min(Math.ceil(colorOptions.length / COLORS_PER_PAGE) - 1, colorPage + 1); renderColorPicker(); };
+        colorPicker.appendChild(rightArrow);
+    }
+}
+function setBubbleColor(color) {
+    selectedBubbleColor = color;
+    localStorage.setItem('bubbleColor', color);
+    renderColorPicker();
+    // Update bubble color
+    document.querySelectorAll('#grid-layer .grid-bubble').forEach(b => {
+        b.style.borderColor = color + '80';
+    });
+    document.querySelectorAll('.metaball').forEach(m => {
+        m.style.background = color + '66';
+    });
+}
+renderColorPicker();
+if (selectedBubbleColor) setBubbleColor(selectedBubbleColor);
+window.addEventListener('resize', renderColorPicker);
+
+// Background color: allow any color
+const bgColorInput = document.createElement('input');
+bgColorInput.type = 'color';
+bgColorInput.value = localStorage.getItem('bgColor') || '#121212';
+bgColorInput.style.margin = '8px 0 0 0';
+bgColorInput.title = 'Set background color';
+bgColorInput.addEventListener('input', e => {
+    document.body.style.backgroundColor = e.target.value;
+    localStorage.setItem('bgColor', e.target.value);
+});
+const bgColorLabel = document.createElement('label');
+bgColorLabel.textContent = 'Background Color';
+bgColorLabel.style.display = 'block';
+bgColorLabel.style.marginTop = '8px';
+colorPicker.parentNode.insertBefore(bgColorLabel, colorPicker.nextSibling);
+colorPicker.parentNode.insertBefore(bgColorInput, bgColorLabel.nextSibling);
+if (bgColorInput.value) document.body.style.backgroundColor = bgColorInput.value;
