@@ -5,32 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index-style.css">
     <title>Setnour6's Page</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            margin-bottom: 50px;
-        }
-        .navbar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-    </style>
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+        <defs>
+            <filter id="goo">
+            <feGaussianBlur id="blurFilter" in="SourceGraphic" stdDeviation="8" result="blur" /> <!-- stdDeviation="4" for less blurring and more pronounced appearances. synergise with css: "#grid-layer .grid-bubble" -->
+            <feColorMatrix in="blur" mode="matrix"
+                values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 18 -7
+                " result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
 </head>
 <body>
-    <h1>Setnour6</h1>
-    <!-- <p>...</p> -->
-    <div class="navbar">
+    <div id="bubble-bg">
+        <div id="grid-layer"></div>
+        <div id="meta-layer"></div>
+    </div>
+    <!-- <h1>Setnour6</h1> -->
+    <div class="logo-container">
+        <img src="./media/setnour6-logo.png" alt="Setnour6" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <h1 class="logo-text">Setnour6</h1>
+    </div>
+    <div id="hamburger" class="hamburger rainbow-border">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div id="sidebar" class="sidebar">
+        <section>
+            <h3>Projects</h3>
+            <a href="projects-pillpack/main.html">
+                <img src="media/garrys-mod.svg" alt="GMod" class="icon"> Pill Pack Hide and Seek
+            </a>
+        </section>
+
+        <section>
+            <h3>Social Media</h3>
+            <a href="https://github.com/Setnour6">
+                <img src="media/github2.svg" alt="GitHub" class="icon"> GitHub
+            </a>
+            <a href="https://www.youtube.com/setnour6">
+                <img src="media/youtube.svg" alt="YouTube" class="icon"> YouTube
+            </a>
+            <a href="https://open.spotify.com/artist/11NVbkRA1o8RmPxASj8XHm?si=qPMSkAmQR5SIdNzYcz5tOg">
+                <img src="media/spotify.svg" alt="Spotify" class="icon"> Spotify
+            </a>
+            <a href="https://setnour6.bandcamp.com/">
+                <img src="media/bandcamp.svg" alt="Bandcamp" class="icon"> Bandcamp
+            </a>
+            <a href="https://soundcloud.com/setnour6">
+                <img src="media/soundcloud.svg" alt="Soundcloud" class="icon"> Soundcloud
+            </a>
+            <a href="https://genius.com/artists/Setnour6">
+                <img src="media/genius.svg" alt="Genius" class="icon"> Genius
+            </a>
+            <a href="https://steamcommunity.com/id/setnour6/">
+                <img src="media/steam.svg" alt="Steam" class="icon"> Steam
+            </a>
+            <a href="https://www.instagram.com/this_is_setnour6/?hl=en">
+                <img src="media/instagram.svg" alt="Instagram" class="icon"> Instagram
+            </a>
+            <a href="https://ko-fi.com/setnour6">
+                <img src="media/kofi.svg" alt="Kofi" class="icon"> Ko-Fi
+            </a>
+        </section>
+    </div>
+    <div id="settings-btn" class="settings rainbow-border">
+        <img src="media/settings.svg" alt="Settings Icon" />
+    </div>
+    <div id="settings-panel" class="settings-sidebar">
+        <section>
+            <h3>Background Effect</h3>
+            <select id="bg-effect-select">
+                <option value="default">Smooth (Default)</option>
+                <option value="strong">Strong</option>
+                <option value="off">Off</option>
+            </select>
+        </section>
+        <section>
+            <h3>Music Volume</h3>
+            <div class="volume-container">
+                <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5">
+                <div class="volume-display"></div>
+            </div>
+        </section>
+        <section>
+            <h3>Focus Mode</h3>
+            <button id="focus-mode-btn" class="clear-btn">Enter Focus Mode</button>
+            <p style="font-size: 12px; color: #aaa; margin-top: 5px;">Press Ctrl+Alt+F to toggle</p>
+        </section>
+        <section>
+            <h3>Data</h3>
+            <button id="clear-cache" class="clear-btn">Clear Index Storage</button>
+        </section>
+    </div>
+    <div id="music-btn" class="music-btn">
+        <img src="media/music.svg" alt="Music Icon" />
+        <div class="music-slash"></div>
+    </div>
+    <audio id="bg-music" preload="auto" loop>
+        <source src="media/Setnour6 - Within the Giant Cocoon (身陷巨茧) [Illusion Version].wav" type="audio/ogg">
+    </audio>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="exit-focus-btn">
+        Exit Focus Mode
+        <div class="shortcut">Ctrl+Alt+F</div>
+    </div>
+
+    <!-- BELOW IS THE OLD CONTENT BEFORE THE MAJOR INDEX REDESIGN, KEPT FOR HISTORICAL PURPOSES -->
+    <!-- <div class="navbar">
         <div class="dropdown">
             <button class="dropbtn">Projects</button>
             <div class="dropdown-content" style="min-width: 110px;">
@@ -45,6 +135,8 @@
                 <a href="https://github.com/Setnour6">GitHub</a>
             </div>
         </div>
-    </div>
+    </div> -->
+
+    <script src="index-script.js"></script>
 </body>
 </html>
