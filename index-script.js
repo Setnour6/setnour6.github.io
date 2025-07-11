@@ -229,10 +229,125 @@ function applyBgEffect(mode) {
 
 clearCacheBtn.addEventListener('click', () => {
     localStorage.clear();
-    location.reload();
+    showToast('Local storage cleared!');
+    setTimeout(() => location.reload(), 1200);
 });
 
+function handleAccessibleButton(el, clickHandler) {
+    el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            clickHandler();
+        }
+    });
+}
+
+handleAccessibleButton(hamburger, () => hamburger.click());
+handleAccessibleButton(settingsBtn, () => settingsBtn.click());
+
 const musicBtn = document.getElementById('music-btn');
+handleAccessibleButton(musicBtn, () => musicBtn.click());
+
+const exitFocusBtn = document.getElementById('exit-focus-btn');
+handleAccessibleButton(exitFocusBtn, () => exitFocusBtn.click());
+
+let lastFocusedElement = null;
+
+function setSidebarTabbable(isOpen) {
+    const tabbables = sidebar.querySelectorAll('a, button');
+    tabbables.forEach(el => {
+        if (isOpen) {
+            el.setAttribute('tabindex', '0');
+        } else {
+            el.setAttribute('tabindex', '-1');
+        }
+    });
+}
+
+function trapSidebarFocus() {
+    if (!sidebar.classList.contains('open')) return;
+    setSidebarTabbable(true);
+    const focusable = sidebar.querySelectorAll('a, button, [tabindex="0"]');
+    if (focusable.length === 0) return;
+    focusable[0].focus();
+    function handleTab(e) {
+        if (!sidebar.classList.contains('open')) return;
+        const focusables = Array.from(sidebar.querySelectorAll('a, button, [tabindex="0"]'));
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                if (document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        }
+        if (e.key === 'Escape') {
+            closeSidebar();
+            hamburger.focus();
+        }
+    }
+    sidebar.addEventListener('keydown', handleTab);
+    sidebar._trapHandler = handleTab;
+}
+function releaseSidebarFocus() {
+    setSidebarTabbable(false);
+    if (sidebar._trapHandler) {
+        sidebar.removeEventListener('keydown', sidebar._trapHandler);
+        sidebar._trapHandler = null;
+    }
+}
+hamburger.addEventListener('click', () => {
+    if (sidebar.classList.contains('open')) {
+        lastFocusedElement = document.activeElement;
+        setTimeout(trapSidebarFocus, 100);
+    } else {
+        releaseSidebarFocus();
+        if (lastFocusedElement) lastFocusedElement.focus();
+    }
+});
+overlay.addEventListener('click', () => {
+    releaseSidebarFocus();
+    if (lastFocusedElement) lastFocusedElement.focus();
+});
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        releaseSidebarFocus();
+        if (lastFocusedElement) lastFocusedElement.focus();
+    }
+});
+
+setSidebarTabbable(false);
+
+let lastFocusedSettings = null;
+settingsBtn.addEventListener('click', () => {
+    if (settingsPanel.classList.contains('show')) {
+        lastFocusedSettings = document.activeElement;
+        setTimeout(() => {
+            const focusable = settingsPanel.querySelectorAll('select, button, [tabindex="0"]');
+            if (focusable.length) focusable[0].focus();
+        }, 100);
+    } else {
+        if (lastFocusedSettings) lastFocusedSettings.focus();
+    }
+});
+
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2200);
+}
+
 const bgMusic = document.getElementById('bg-music');
 const musicSlash = musicBtn.querySelector('.music-slash');
 
@@ -259,31 +374,66 @@ musicBtn.addEventListener('click', () => {
 function activateMusic() {
     isMusicActive = true;
     musicBtn.classList.add('active');
-    
     bgMusic.volume = 0;
-    bgMusic.play().then(() => {
-        fadeVolume(0.5, 300);
-        isMusicPlaying = true;
-        updateMusicButton();
-    }).catch(error => {
-        console.error("Audio playback failed:", error);
-        isMusicActive = false;
-        musicBtn.classList.remove('active');
-    });
+    const saved = parseFloat(localStorage.getItem('musicProgress') || '0');
+    const tryPlay = () => {
+        bgMusic.play().then(() => {
+            fadeVolume(volumeControl.value, 300);
+            isMusicPlaying = true;
+            updateMusicButton();
+            // showToast('Music started');
+        }).catch(error => {
+            console.error("Audio playback failed:", error);
+            isMusicActive = false;
+            musicBtn.classList.remove('active');
+        });
+    };
+    if (saved > 0.5 && bgMusic.duration && saved < bgMusic.duration - 2) {
+        promptMusicRestore(saved, bgMusic.duration, (restore) => {
+            if (restore) {
+                bgMusic.currentTime = saved;
+            } else {
+                bgMusic.currentTime = 0;
+                localStorage.removeItem('musicProgress');
+            }
+            tryPlay();
+        });
+    } else if (saved > 0.5 && !bgMusic.duration) {
+        bgMusic.addEventListener('loadedmetadata', function handler() {
+            bgMusic.removeEventListener('loadedmetadata', handler);
+            if (saved < bgMusic.duration - 2) {
+                promptMusicRestore(saved, bgMusic.duration, (restore) => {
+                    if (restore) {
+                        bgMusic.currentTime = saved;
+                    } else {
+                        bgMusic.currentTime = 0;
+                        localStorage.removeItem('musicProgress');
+                    }
+                    tryPlay();
+                });
+            } else {
+                tryPlay();
+            }
+        });
+        bgMusic.load();
+    } else {
+        tryPlay();
+    }
 }
 
 function toggleMute() {
     isMusicMuted = !isMusicMuted;
-    
     if (isMusicMuted) {
         updateMusicButton();
         fadeVolume(0, 300, () => {
             bgMusic.muted = true;
+            // showToast('Music muted');
         });
     } else {
         bgMusic.muted = false;
         fadeVolume(0.5, 300);
         updateMusicButton();
+        // showToast('Music unmuted');
     }
 }
 
@@ -349,7 +499,31 @@ if (savedVolume !== null) {
 
 const volumeDisplay = document.querySelector('.volume-display');
 
-// Add this after setting up the volume control
+const volumePopup = document.getElementById('volume-popup');
+const volumeContainer = document.querySelector('.volume-container');
+let volumePopupTimeout = null;
+function showVolumePopup(vol) {
+    if (!volumePopup || !volumeContainer) return;
+    volumePopup.textContent = `${Math.round(vol * 100)}%`;
+    volumePopup.classList.add('show');
+    volumeContainer.appendChild(volumePopup);
+
+    const slider = volumeControl;
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const percent = (vol - min) / (max - min);
+    const sliderWidth = slider.offsetWidth;
+    const knobRadius = 10; // should be half of thumb width (20px)
+    const knobX = percent * (sliderWidth - knobRadius * 2) + knobRadius;
+
+    volumePopup.style.left = `${knobX - volumePopup.offsetWidth / 2 + 2}px`;
+
+    clearTimeout(volumePopupTimeout);
+    volumePopupTimeout = setTimeout(() => {
+        volumePopup.classList.remove('show');
+    }, 1000);
+}
+
 function updateVolumeDisplay() {
     const volume = volumeControl.value;
     volumeDisplay.style.width = `${volume * 160}px`;
@@ -361,7 +535,9 @@ volumeControl.addEventListener('input', (e) => {
     bgMusic.volume = volume;
     localStorage.setItem('musicVolume', volume);
     updateVolumeDisplay();
-    
+
+    showVolumePopup(volume);
+
     if (isMusicMuted && volume > 0) {
         isMusicMuted = false;
         bgMusic.muted = false;
@@ -369,30 +545,74 @@ volumeControl.addEventListener('input', (e) => {
     }
 });
 
-bgMusic.muted = isMusicMuted;
+const musicRestoreModal = document.getElementById('music-restore-modal');
+const musicRestoreTime = document.getElementById('music-restore-time');
+const musicRestoreYes = document.getElementById('music-restore-yes');
+const musicRestoreNo = document.getElementById('music-restore-no');
 
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden && isMusicPlaying) {
-        bgMusic.pause();
-    } else if (!document.hidden && isMusicActive && !isMusicPlaying) {
-        bgMusic.play();
+function formatTime(secs) {
+    secs = Math.floor(secs);
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+setInterval(() => {
+    if (isMusicPlaying && bgMusic.currentTime > 0) {
+        localStorage.setItem('musicProgress', bgMusic.currentTime);
     }
-});
+}, 2000);
+
+function promptMusicRestore(progress, duration, cb) {
+    if (!musicRestoreModal) return cb(false);
+    musicRestoreTime.textContent = formatTime(progress);
+    musicRestoreModal.style.display = '';
+    setTimeout(() => musicRestoreModal.classList.add('show'), 10);
+    let handled = false;
+    function cleanup() {
+        musicRestoreModal.classList.remove('show');
+        setTimeout(() => { musicRestoreModal.style.display = 'none'; }, 180);
+        musicRestoreYes.removeEventListener('click', yesHandler);
+        musicRestoreNo.removeEventListener('click', noHandler);
+        musicRestoreModal.removeEventListener('keydown', keyHandler);
+    }
+    function yesHandler() {
+        if (handled) return;
+        handled = true;
+        cleanup();
+        cb(true);
+    }
+    function noHandler() {
+        if (handled) return;
+        handled = true;
+        cleanup();
+        cb(false);
+    }
+    function keyHandler(e) {
+        if (e.key === 'Escape') {
+            noHandler();
+        }
+        if (e.key === 'Enter' || e.key === ' ') {
+            yesHandler();
+        }
+    }
+    musicRestoreYes.addEventListener('click', yesHandler);
+    musicRestoreNo.addEventListener('click', noHandler);
+    musicRestoreModal.addEventListener('keydown', keyHandler);
+    musicRestoreModal.tabIndex = -1;
+    musicRestoreModal.focus();
+}
 
 let focusMode = false;
 let mouseTimeout;
 const focusModeBtn = document.getElementById('focus-mode-btn');
-const exitFocusBtn = document.getElementById('exit-focus-btn');
-
 let cursorTimeout;
 let cursorVisible = true;
 
 function showCursor() {
     if (!focusMode) return;
-    
     document.body.classList.add('show-cursor');
     cursorVisible = true;
-    
     clearTimeout(cursorTimeout);
     cursorTimeout = setTimeout(() => {
         if (focusMode) {
@@ -404,23 +624,17 @@ function showCursor() {
 
 function showExitButton() {
     if (!focusMode) return;
-    
     exitFocusBtn.classList.add('show');
     showCursor();
-    
     clearTimeout(mouseTimeout);
     mouseTimeout = setTimeout(() => {
         exitFocusBtn.classList.remove('show');
     }, 2000);
 }
 
-function toggleFocusMode() {
+function setFocusMode(on) {
+    focusMode = on;
     if (focusMode) {
-        document.body.classList.remove('focus-mode');
-        exitFocusBtn.classList.remove('show');
-        clearTimeout(mouseTimeout);
-        document.body.classList.add('show-cursor');
-    } else {
         document.body.classList.add('focus-mode');
         exitFocusBtn.style.display = 'block';
         setTimeout(() => {
@@ -428,10 +642,18 @@ function toggleFocusMode() {
             setTimeout(() => exitFocusBtn.classList.remove('show'), 2000);
         }, 100);
         showCursor();
+    } else {
+        document.body.classList.remove('focus-mode');
+        exitFocusBtn.classList.remove('show');
+        exitFocusBtn.style.display = 'none';
+        clearTimeout(mouseTimeout);
+        document.body.classList.add('show-cursor');
     }
-    
-    focusMode = !focusMode;
     localStorage.setItem('focusMode', focusMode.toString());
+}
+
+function toggleFocusMode() {
+    setFocusMode(!focusMode);
 }
 
 focusModeBtn.addEventListener('click', toggleFocusMode);
@@ -449,10 +671,7 @@ document.addEventListener('touchmove', () => {
 
 const savedFocusMode = localStorage.getItem('focusMode');
 if (savedFocusMode === 'true') {
-    focusMode = true;
-    document.body.classList.add('focus-mode');
-    exitFocusBtn.style.display = 'block';
-    document.body.classList.add('show-cursor');
+    setFocusMode(true);
     cursorTimeout = setTimeout(() => {
         document.body.classList.remove('show-cursor');
         cursorVisible = false;
@@ -460,15 +679,49 @@ if (savedFocusMode === 'true') {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.altKey && e.key === 'f') {
+    if (e.ctrlKey && e.altKey && (e.key === 'f' || e.key === 'F')) {
         toggleFocusMode();
         showCursor();
         e.preventDefault();
     }
 });
 
-document.querySelectorAll('#hamburger, #settings-btn, #music-btn, #exit-focus-btn')
-    .forEach(el => {
-        el.addEventListener('mouseenter', showCursor);
-        el.addEventListener('touchstart', showCursor);
-    });
+const tooltip = document.getElementById('tooltip');
+const tooltipTargets = [
+    { el: document.getElementById('hamburger'), text: 'Menu' },
+    { el: document.getElementById('settings-btn'), text: 'Settings' },
+    { el: document.getElementById('music-btn'), text: 'Music' }
+];
+
+tooltipTargets.forEach(({el, text}) => {
+    if (!el) return;
+    function showTip(e) {
+        tooltip.textContent = text;
+        tooltip.style.display = 'block';
+        tooltip.classList.add('show');
+        const rect = el.getBoundingClientRect();
+        const tipRect = tooltip.getBoundingClientRect();
+        let top, left;
+        const margin = 10;
+        if (rect.top > window.innerHeight / 2) {
+            top = rect.top - tipRect.height - margin;
+        } else {
+            top = rect.bottom + margin;
+        }
+        left = rect.left + rect.width/2 - tipRect.width/2;
+        left = Math.max(8, Math.min(left, window.innerWidth - tipRect.width - 8));
+        tooltip.style.top = `${top}px`;
+        tooltip.style.left = `${left}px`;
+    }
+    function hideTip() {
+        tooltip.classList.remove('show');
+        setTimeout(() => { tooltip.style.display = 'none'; }, 180);
+    }
+    el.addEventListener('mouseenter', showTip);
+    el.addEventListener('mouseleave', hideTip);
+    el.addEventListener('focus', showTip);
+    el.addEventListener('blur', hideTip);
+    el.addEventListener('touchstart', showTip, {passive:true});
+    el.addEventListener('touchend', hideTip, {passive:true});
+    el.addEventListener('touchcancel', hideTip, {passive:true});
+});

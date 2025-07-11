@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index-style.css">
     <title>Setnour6's Page</title>
+    <meta name="description" content="Setnour6's personal site: projects, music, and social links.">
+    <meta property="og:title" content="Setnour6's Page">
+    <meta property="og:description" content="Setnour6's personal site: projects, music, and social links.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://setnour6.github.io/">
+    <meta property="og:image" content="https://setnour6.github.io/media/setnour6-logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Setnour6's Page">
+    <meta name="twitter:description" content="Setnour6's personal site: projects, music, and social links.">
+    <meta name="twitter:image" content="https://setnour6.github.io/media/setnour6-logo.png">
+    <link rel="icon" type="image/png" href="media/setnour6-favicon.png">
+    <link rel="stylesheet" href="index-style.css">
     <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
         <defs>
             <filter id="goo">
@@ -31,57 +42,57 @@
         <img src="./media/setnour6-logo.png" alt="Setnour6" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <h1 class="logo-text">Setnour6</h1>
     </div>
-    <div id="hamburger" class="hamburger rainbow-border">
+    <div id="hamburger" class="hamburger rainbow-border" aria-label="Open navigation menu" role="button" tabindex="0" title="Open menu">
         <span></span>
         <span></span>
         <span></span>
     </div>
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar" role="navigation" aria-label="Sidebar menu" tabindex="-1">
         <section>
             <h3>Projects</h3>
-            <a href="projects-pillpack/main.html">
+            <a href="projects-pillpack/main.html" title="Pill Pack Hide and Seek" tabindex="0">
                 <img src="media/garrys-mod.svg" alt="GMod" class="icon"> Pill Pack Hide and Seek
             </a>
         </section>
 
         <section>
             <h3>Social Media</h3>
-            <a href="https://github.com/Setnour6">
+            <a href="https://github.com/Setnour6" title="GitHub" tabindex="0">
                 <img src="media/github2.svg" alt="GitHub" class="icon"> GitHub
             </a>
-            <a href="https://www.youtube.com/setnour6">
+            <a href="https://www.youtube.com/setnour6" title="YouTube" tabindex="0">
                 <img src="media/youtube.svg" alt="YouTube" class="icon"> YouTube
             </a>
-            <a href="https://open.spotify.com/artist/11NVbkRA1o8RmPxASj8XHm?si=qPMSkAmQR5SIdNzYcz5tOg">
+            <a href="https://open.spotify.com/artist/11NVbkRA1o8RmPxASj8XHm?si=qPMSkAmQR5SIdNzYcz5tOg" title="Spotify" tabindex="0">
                 <img src="media/spotify.svg" alt="Spotify" class="icon"> Spotify
             </a>
-            <a href="https://setnour6.bandcamp.com/">
+            <a href="https://setnour6.bandcamp.com/" title="Bandcamp" tabindex="0">
                 <img src="media/bandcamp.svg" alt="Bandcamp" class="icon"> Bandcamp
             </a>
-            <a href="https://soundcloud.com/setnour6">
+            <a href="https://soundcloud.com/setnour6" title="Soundcloud" tabindex="0">
                 <img src="media/soundcloud.svg" alt="Soundcloud" class="icon"> Soundcloud
             </a>
-            <a href="https://genius.com/artists/Setnour6">
+            <a href="https://genius.com/artists/Setnour6" title="Genius" tabindex="0">
                 <img src="media/genius.svg" alt="Genius" class="icon"> Genius
             </a>
-            <a href="https://steamcommunity.com/id/setnour6/">
+            <a href="https://steamcommunity.com/id/setnour6/" title="Steam" tabindex="0">
                 <img src="media/steam.svg" alt="Steam" class="icon"> Steam
             </a>
-            <a href="https://www.instagram.com/this_is_setnour6/?hl=en">
+            <a href="https://www.instagram.com/this_is_setnour6/?hl=en" title="Instagram" tabindex="0">
                 <img src="media/instagram.svg" alt="Instagram" class="icon"> Instagram
             </a>
-            <a href="https://ko-fi.com/setnour6">
+            <a href="https://ko-fi.com/setnour6" title="Ko-Fi" tabindex="0">
                 <img src="media/kofi.svg" alt="Kofi" class="icon"> Ko-Fi
             </a>
         </section>
     </div>
-    <div id="settings-btn" class="settings rainbow-border">
+    <div id="settings-btn" class="settings rainbow-border" aria-label="Open settings" role="button" tabindex="0" title="Settings">
         <img src="media/settings.svg" alt="Settings Icon" />
     </div>
-    <div id="settings-panel" class="settings-sidebar">
+    <div id="settings-panel" class="settings-sidebar" role="region" aria-label="Settings panel" tabindex="-1">
         <section>
             <h3>Background Effect</h3>
-            <select id="bg-effect-select">
+            <select id="bg-effect-select" aria-label="Background effect">
                 <option value="default">Smooth (Default)</option>
                 <option value="strong">Strong</option>
                 <option value="off">Off</option>
@@ -90,21 +101,21 @@
         <section>
             <h3>Music Volume</h3>
             <div class="volume-container">
-                <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5">
+                <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1" aria-label="Music volume" tabindex="0">
                 <div class="volume-display"></div>
             </div>
         </section>
         <section>
             <h3>Focus Mode</h3>
-            <button id="focus-mode-btn" class="clear-btn">Enter Focus Mode</button>
+            <button id="focus-mode-btn" class="clear-btn" aria-label="Toggle focus mode" tabindex="0" title="Toggle focus mode">Enter Focus Mode</button>
             <p style="font-size: 12px; color: #aaa; margin-top: 5px;">Press Ctrl+Alt+F to toggle</p>
         </section>
         <section>
             <h3>Data</h3>
-            <button id="clear-cache" class="clear-btn">Clear Index Storage</button>
+            <button id="clear-cache" class="clear-btn" aria-label="Clear index storage" tabindex="0" title="Clear local storage">Clear Index Storage</button>
         </section>
     </div>
-    <div id="music-btn" class="music-btn">
+    <div id="music-btn" class="music-btn" aria-label="Music controls" role="button" tabindex="0" title="Music controls">
         <img src="media/music.svg" alt="Music Icon" />
         <div class="music-slash"></div>
     </div>
@@ -112,12 +123,30 @@
         <source src="media/Setnour6 - Within the Giant Cocoon (身陷巨茧) [Illusion Version].wav" type="audio/ogg">
     </audio>
 
+    <div id="volume-popup" class="volume-popup" aria-live="polite"></div>
+
+    <div id="tooltip" class="custom-tooltip" role="tooltip" style="display:none"></div>
+
+    <div id="music-restore-modal" class="music-restore-popup" style="display:none" role="dialog" aria-modal="true" aria-labelledby="music-restore-title">
+        <div class="music-restore-content">
+            <div class="music-restore-title" id="music-restore-title">Resume music?</div>
+            <div class="music-restore-msg">
+                Resume from <span id="music-restore-time"></span>?
+            </div>
+            <div class="music-restore-actions">
+                <button id="music-restore-yes" class="clear-btn">Yes</button>
+                <button id="music-restore-no" class="clear-btn">No</button>
+            </div>
+        </div>
+    </div>
+
     <div id="overlay" class="overlay"></div>
 
-    <div id="exit-focus-btn">
+    <div id="exit-focus-btn" tabindex="0" aria-label="Exit focus mode" role="button" title="Exit focus mode">
         Exit Focus Mode
         <div class="shortcut">Ctrl+Alt+F</div>
     </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <!-- BELOW IS THE OLD CONTENT BEFORE THE MAJOR INDEX REDESIGN, KEPT FOR HISTORICAL PURPOSES -->
     <!-- <div class="navbar">
