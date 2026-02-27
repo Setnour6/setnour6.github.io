@@ -388,7 +388,7 @@ function activateMusic() {
             musicBtn.classList.remove('active');
         });
     };
-    if (saved > 0.5 && bgMusic.duration && saved < bgMusic.duration - 2) {
+    if (saved > 0.5 && bgMusic.duration && saved < bgMusic.duration + 1) {
         promptMusicRestore(saved, bgMusic.duration, (restore) => {
             if (restore) {
                 bgMusic.currentTime = saved;
