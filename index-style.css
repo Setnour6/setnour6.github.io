@@ -225,7 +225,7 @@ h1 {
 }
 
 .sidebar.open {
-    transform: translateX(25%);
+    transform: translateX(15%);
     box-shadow: -12px 0 32px rgba(0,0,0,0.7);
 }
 
@@ -264,7 +264,7 @@ h1 {
 .sidebar a .icon {
     width: 18px;
     height: 18px;
-    margin-right: 10px;
+    margin-right: 6px;
     vertical-align: middle;
 }
 
